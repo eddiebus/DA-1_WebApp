@@ -19,13 +19,13 @@ function MapLoad()
     $.ajax({
         type: "GET",
         url: "PHP//DataGet.php",
-        dataType: "json",
+        dataType: 'json',
         success: function(data){
             alert("AJAX OK");
         },
         error: function(data)
         {
-            alert("AJAK FAIL");
+            alert(data);
         }
     });
 }
