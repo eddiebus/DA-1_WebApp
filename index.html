@@ -2,7 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--JavaScript Link-->
+    <!--JQuery Link-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!--MapBox Link-->
@@ -20,21 +20,11 @@
     <div class ="TitleBody">
         <h1>DA-1 Finder</h1>
     </div>
-    <div id="DataView" class ="DataBody"></div>
-    <div id='Mapbox_Map' style='width: 100%; height: 60vh;'></div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow';
-        const map = new mapboxgl.Map({
-            container: 'Mapbox_Map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [-4,55], // starting position [lng, lat]
-            zoom: 4, // starting zoom
-            projection: 'mercator' // display the map as a 3D globe
-        });
-        map.on('style.load', () => {
-            map.setFog({}); // Set the default atmosphere style
-        });
-    </script>
+    <div id="DataView" class ="DataBody">
+        <p>Data View Container</p>
+    </div>
+    <div id='Mapbox_Map' style='width: 100%; height: 55vh;'></div>
+    <script src="JS//MapJS.js" onload="MapLoad()"></script>
 
 </body>
 </html>
