@@ -1,7 +1,12 @@
-﻿*{
+﻿/*Set all elements to box sizing*/
+*{
     box-sizing: border-box;
 }
-
+/*Main Body (HTML)*/
 body {
-    margin-left = 0px;
+    margin-left: 0px;
+}
+
+h1{
+    font-family: Quicksand, Helvetica, sans-serif;
 }
