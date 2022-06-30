@@ -21,11 +21,11 @@ function MapLoad()
         url: "PHP//DataGet.php",
         dataType: "json",
         success: function(data){
-            console.log("AJAX OK");
+            alert("AJAX OK");
         },
         error: function(data)
         {
-            console.log("ERRROR");
+            alert("AJAK FAIL");
         }
     });
 }
