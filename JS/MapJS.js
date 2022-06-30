@@ -23,9 +23,8 @@ function MapLoad()
         success: function(data){
             alert("AJAX OK");
         },
-        error: function(data)
-        {
-            alert(data);
+        error:  function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
 }
