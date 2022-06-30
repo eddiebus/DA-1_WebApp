@@ -17,16 +17,18 @@
     <title></title>
 </head>
 <body>
-    <h1>DA-1 Finder</h1>
-    <div id="DataView" class = "DataBody"></div>
-    <div id='map' style='width: 100%; height: 50vh;'></div>
+    <div class ="TitleBody">
+        <h1>DA-1 Finder</h1>
+    </div>
+    <div id="DataView" class ="DataBody"></div>
+    <div id='Mapbox_Map' style='width: 100%; height: 60vh;'></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow';
         const map = new mapboxgl.Map({
-            container: 'map', // container ID
+            container: 'Mapbox_Map', // container ID
             style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [-74.5, 40], // starting position [lng, lat]
-            zoom: 9, // starting zoom
+            center: [-4,55], // starting position [lng, lat]
+            zoom: 4, // starting zoom
             projection: 'mercator' // display the map as a 3D globe
         });
         map.on('style.load', () => {
