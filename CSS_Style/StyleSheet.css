@@ -26,8 +26,10 @@ h1{
 }
 
 .DataBody{
-    width: 100%;
-    height: 40vh;
+    position: fixed;
+    z-index : 1;
+    width: 20vw;
+    height: 100%;
     background-color: rgb(196, 1, 1);
     overflow: hidden;
 }
