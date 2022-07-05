@@ -51,7 +51,7 @@ div.Header{
 img.Header{
     height: 30px;
     width: auto;
-    margin-right: 5px;
+    margin-right: 8px;
     transform: translateY(+25%);
     float: right;
     overflow: clip;
@@ -60,16 +60,16 @@ img.Header{
 .DataBody{
     position: fixed;
     z-index : 1;
-    width: 20vw;
+    bottom: -100%;
+    width: 100%;
     height: 100%;
     background-color: rgb(165, 165, 165);
-    overflow: hidden;
-    border-right: solid rgb(0, 0, 0);
-
+    border-top: solid black 5px;
 }
 
 div.DataBody_Name{
-    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: auto;
     height: 100px;
     background-color: white
@@ -85,7 +85,7 @@ p.DataBody_Name{
 div.DataBody_Info{
     margin: 10px;
     width: auto;
-    height: 80%;
+    height: 30%;
     background-color: white;
 }
 

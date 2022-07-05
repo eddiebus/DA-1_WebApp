@@ -1,17 +1,19 @@
 const containerName = "Mapbox_Map";
 const mapboxToken = "pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow";
 
-var PeekDevice = false;
+let map = null;
+const MapDebug = false;
 
-function SetKeyboardEventHandler()
-{
-    
+var DataView = {
+    isActive: false,
+    YPosition: 0
 }
 
+//Set up the Mapbox Map
 function MapLoad()
 {
     mapboxgl.accessToken = mapboxToken;
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: containerName, // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
         center: [-4,55], // starting position [lng, lat]
@@ -22,6 +24,13 @@ function MapLoad()
     map.on('style.load', () => {
         map.setFog({}); // Set the default atmosphere style
     });
+
+    //Disable Map Rotation
+    map.dragRotate.disable();
+    map.touchZoomRotate.disableRotation();
+
+    //Turn off X Rotation
+    map.setMaxPitch(0);
 
     $.ajax({
         type: "GET",
@@ -39,6 +48,18 @@ function MapLoad()
 
 }
 
+function MapDebugLog()
+{
+    let position = map.getCenter();
+    console.log("Map Debug:\n" +
+        `Map Pos: ${position}`)
+}
+
 function MapSystemUpdate() {
+    if (MapDebugLog == true)
+    {
+        MapDebugLog();
+    }
+
     requestAnimationFrame(MapSystemUpdate);
 }
