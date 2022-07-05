@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!--MapBox Link-->
+
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 
@@ -17,13 +18,19 @@
     <title></title>
 </head>
 <body>
-    <div class="TitleBody">
+    <!--Main Title/ Header-->
+    <div class="Header">
         <h1>DA-1 Finder</h1>
+        <img src="Assets/Logos/Lubrizol-Logo.jpg" class ="Header">
+        <img src="Assets/Logos/Think_Ocean.png" class = "Header">
     </div>
 
-    <div id='Mapbox_Map' style='width: 100%; height: 95vh; z-index  -1;'>
+    <div id='Mapbox_Map' style='width: 100%; height: calc(100vh - 50px);contain:'>
         <div id="DataView" class="DataBody">
-            <p>Data View Container</p>
+            <div id="DataView Name" class ="DataBody_Name">
+                <p style="text-align: center">Device Name Box</p>
+            </div>
+            <div id="DataView Info" class ="DataBody_Info"></div>
         </div>
     </div>
 
