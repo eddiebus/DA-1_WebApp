@@ -1,4 +1,5 @@
 <?php
-echo json_encode(101);
+$databaseDir = "Database/Data.db"
+echo http_response_code(200);
 
 ?>

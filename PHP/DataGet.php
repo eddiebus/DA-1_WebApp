@@ -1,4 +1,6 @@
 <?php
-echo json_encode(101);
+
+
+echo json_encode("Hello");
 
 ?>
