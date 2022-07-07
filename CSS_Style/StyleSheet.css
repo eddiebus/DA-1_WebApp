@@ -90,3 +90,13 @@ div.DataBody_Info{
 }
 
 
+.mapMarker {
+    background-image: url("MapIcons/mapbox-marker-icon-20px-green.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 5vw;
+    height: 5vh;
+    cursor: pointer;
+}
+
+
