@@ -1,6 +1,32 @@
 const containerName = "Mapbox_Map";
 const mapboxToken = "pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow";
 
+
+class Time{
+    constructor() {
+        this.TimeStart = Date.now()
+        this.DeltaStart = Date.now()
+        this.DeltaCurrent = 0;
+
+        this.DeltaTime = 0;
+
+    }
+
+    Tick(){
+        this.DeltaCurrent = Date.now();
+        this.DeltaTime = (this.DeltaCurrent - this.DeltaStart)/ 100;
+        this.DeltaStart = this.DeltaCurrent;
+    }
+}
+
+let timeObject = new Time();
+
+
+let PasTime = Date.now();
+let DeltaTime = 0
+
+
+
 const mapboxMap = {
     map : null,
     mapDebug : false,
@@ -10,10 +36,47 @@ const mapboxMap = {
 let map = null;
 const MapDebug = false;
 
-const DataView = {
+let DataView = {
     isActive: false,
-    YPosition: 0
+    AnimationDelta: 0
 };
+
+function ToggleDataView(toggleBool)
+{
+    DataView.isActive = toggleBool;
+    if (DataView.isActive == true) {
+        console.log("DataView on!");
+    }
+    else
+    {
+        console.log("DataView off!");
+    }
+}
+
+function UpdateDataView(){
+    let speedRate = 0.8;
+    if (DataView.isActive == false)
+    {
+        DataView.AnimationDelta -= timeObject.DeltaTime * speedRate;
+        if (DataView.AnimationDelta < 0){
+            DataView.AnimationDelta = 0;
+        }
+    }
+    else{
+        DataView.AnimationDelta += timeObject.DeltaTime * speedRate;
+        if (DataView.AnimationDelta > 1)
+        {
+            DataView.AnimationDelta = 1;
+        }
+    }
+
+    let mapObject = document.getElementById("DataView");
+    if (mapObject){
+        let animValue = (0.5 * DataView.AnimationDelta);
+        mapObject.style.setProperty("bottom",`calc(-100% + (30% * ${DataView.AnimationDelta}))`);
+    }
+}
+
 
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
@@ -27,6 +90,9 @@ class DeviceMarker {
         }
 
         this.divObject = document.createElement('div');
+        this.divObject.addEventListener('click',function(){
+            ToggleDataView(true);
+        });
         this.divObject.className = CSS_Style;
 
         this.markerObject = new mapboxgl.Marker(this.divObject);
@@ -46,10 +112,7 @@ class DeviceMarker {
 //GeoJson of Device Points
 const DevicePoints = [];
 
-function GetData()
-{
 
-}
 
 function SetDevicePoints() {
     DevicePoints.push(
@@ -156,7 +219,11 @@ function MapDebugLog()
     }
 }
 
+DataView.isActive = false;
+
 function MapSystemUpdate() {
     MapDebugLog();
+    UpdateDataView();
+    timeObject.Tick();
     requestAnimationFrame(MapSystemUpdate);
 }
