@@ -1,7 +1,7 @@
 <?php
 function CheckPostMessage()
 {
-    if (isset($_POST))
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         return true;
     }
@@ -11,10 +11,11 @@ function CheckPostMessage()
     }
 }
 
-if (CheckPostMessage() == false)
+if (!CheckPostMessage())
 {
     echo "HTTP Request is not type 'POST'";
 }
-
-echo "Hello Post";
+else {
+    echo "Hello Post";
+}
 ?>
