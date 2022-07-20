@@ -36,7 +36,6 @@ else {
 INSERT INTO [dbo].[Logs] (ID,Message,MessageType)
 VALUES (%s,%s,%s)
 ";
-        $query =  sprintf($query,$)
 
         date_default_timezone_set('UTC');
         $currentTime = date('Y-m-d H:i:s');
