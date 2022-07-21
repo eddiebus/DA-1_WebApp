@@ -18,42 +18,38 @@ if (!CheckPostMessage())
     echo "HTTP Request is not type 'POST'";
 }
 else {
-    $connectionOptions = array(
-        //Database name
-        "Database" => $dbName,
-        //User Name
-        "Uid" => $dbUserName,
-        "PWD" => $dbPassword
-    );
+    $db = null;
+    try {
+        $db = new PDO("sqlsrv:server=$dbAddress;Database=$dbName", $dbUserName, $dbPassword);
 
-    $conn = sqlsrv_connect($dbAddress,$connectionOptions);
-    if ($conn)
-    {
-        echo "Server Connection Success!\n";
-        $query = "
-INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)
-VALUES (%s,'POST',%s)
-";
+        echo "PDO Connection Success"."<br>";
 
         date_default_timezone_set('UTC');
-        $currentTime = date('Y-m-d H:i:s');
-        $messageJson = json_encode($_POST);
+        $currentDateTime = date("Y-m-d h:i:sa");
+        $message = implode($_POST);
 
-        $query = sprintf($query,$currentTime,$messageJson);
+        $insertQuery = "
+        INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)
+        VALUES ('$currentDateTime','Post','$message');;
+        ";
 
-        $queryResult = sqlsrv_query($conn,$query);
-        if (!$queryResult)
+        $result =  $db->query($insertQuery);
+
+        if (!$result)
         {
-            echo "SQL Qeury Failed!!!\n";
-            echo(sqlsrv_errors());
+            echo "Statement Error"."<br>";
+            echo "$insertQuery";
         }
         else{
-            echo http_response_code(200);
+            echo "ok";
+            echo implode($_POST);
         }
     }
-    else
-    {
-        echo "Server Connection Error\n";
+    catch (PDOException $error) {
+        echo "PDO Error: ".$error->getMessage()."<br>";
+    }
+    catch (Exception $error){
+        echo "General Connection Error: ".$error->getMessage()."<br>";
     }
 
 }
