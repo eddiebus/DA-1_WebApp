@@ -25,7 +25,7 @@ else {
         echo "PDO Connection Success"."<br>";
 
         date_default_timezone_set('UTC');
-        $currentDateTime = date("Y-m-d h:i:sa");
+        $currentDateTime = date("Y-m-d h:i:s");
         $message = implode($_POST);
 
         $insertQuery = "
