@@ -5,11 +5,11 @@ function CheckPostMessage()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        return true;
+        return TRUE;
     }
     else
     {
-        return false;
+        return FALSE;
     }
 }
 
@@ -33,12 +33,25 @@ else {
     {
         echo "Server Connection Success!";
         $query = "
-INSERT INTO [dbo].[Logs] (ID,Message,MessageType)
-VALUES (%s,%s,%s)
+INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)
+VALUES (%s,'POST',%s)
 ";
 
         date_default_timezone_set('UTC');
         $currentTime = date('Y-m-d H:i:s');
+        $messageJson = json_encode($_POST);
+
+        $query = sprintf($query,$currentTime,$messageJson);
+
+        $queryResult = sqlsrv_query($conn,$query);
+        if (!$queryResult)
+        {
+            echo "SQL Qeury Failed!!!";
+            echo(sqlsrv_errors());
+        }
+        else{
+            echo http_response_code(200);
+        }
     }
     else
     {
