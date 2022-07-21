@@ -1,7 +1,7 @@
 <?php
 include 'dbInfo.php';
 
-function CheckPostMessage()
+function CheckPostMessage(): bool
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
@@ -18,8 +18,6 @@ if (!CheckPostMessage())
     echo "HTTP Request is not type 'POST'";
 }
 else {
-    echo "Hello Post";
-
     $connectionOptions = array(
         //Database name
         "Database" => $dbName,
@@ -29,9 +27,9 @@ else {
     );
 
     $conn = sqlsrv_connect($dbAddress,$connectionOptions);
-    if (!$conn)
+    if ($conn)
     {
-        echo "Server Connection Success!";
+        echo "Server Connection Success!\n";
         $query = "
 INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)
 VALUES (%s,'POST',%s)
@@ -46,7 +44,7 @@ VALUES (%s,'POST',%s)
         $queryResult = sqlsrv_query($conn,$query);
         if (!$queryResult)
         {
-            echo "SQL Qeury Failed!!!";
+            echo "SQL Qeury Failed!!!\n";
             echo(sqlsrv_errors());
         }
         else{
@@ -55,7 +53,7 @@ VALUES (%s,'POST',%s)
     }
     else
     {
-        echo "Server Connection Error";
+        echo "Server Connection Error\n";
     }
 
 }
