@@ -26,7 +26,7 @@ else {
 
         date_default_timezone_set('UTC');
         $currentDateTime = date("Y-m-d h:i:s");
-        $message = implode($_POST);
+        $message = file_get_contents('php://input');
 
         $insertQuery = "
         INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)

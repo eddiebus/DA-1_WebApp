@@ -1,3 +1,4 @@
 POST http://localhost:80/DataPost.php
-Content-Type: application/json
+Content-Type: text/plain
 
+{asdoiajsdoiasjd}
