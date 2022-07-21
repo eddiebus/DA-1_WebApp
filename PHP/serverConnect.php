@@ -1,22 +1,20 @@
 <?php
-//My Server Web Address
-$serverName = "da1devicedb.database.windows.net";
-$connectionOptions = array(
-    //Database name
-    "Database" => "DA1_Data",
-    //User Name
-    "Uid" => "da1Admin",
-    "PWD" => "Da1device!"
-);
+//Get Database Info + Login
 
-$conn = sqlsrv_connect($serverName,$connectionOptions);
-if ($conn == false)
-{
-    echo "Server Connection Success!";
+include "dbInfo.php";
+//Login to database
+$db = null;
+try {
+    $db = new PDO("sqlsrv:server=$dbAddress;Database=$dbName", $dbUserName, $dbPassword);
 }
-else
-{
-    echo "Server Connection Error";
+catch (PDOException $error) {
+    echo "PDO Error: ".$error->getMessage()."<br>";
 }
+catch (Exception $error){
+    echo "General Connection Error: ".$error->getMessage()."<br>";
+}
+
+
+
 
 ?>
