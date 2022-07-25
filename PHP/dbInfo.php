@@ -1,7 +1,6 @@
 <?php
-$dbAddress = "da1devicedb.database.windows.net";
-$dbName = "DA1_Data";
-$dbUserName = "da1Admin";
-$dbPassword = "Da1device!";
-
+$dbAddress = "uod-thinkocean.database.windows.net";
+$dbName = "DA1_DB";
+$dbUserName = "UODThinkOceanAdmin";
+$dbPassword = "taAdmin!";
 ?>
