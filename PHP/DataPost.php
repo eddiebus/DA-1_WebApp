@@ -1,6 +1,5 @@
 <?php
-include 'dbInfo.php';
-require_once('DBCOnnectService.php');
+require_once('DBConnectService.php');
 
 $conn = new DA1Database();
 
