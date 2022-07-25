@@ -19,8 +19,4 @@ catch (Exception $error){
     echo "General Connection Error: ".$error->getMessage()."<br>";
 }
 
-
-
-
-
 ?>

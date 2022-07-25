@@ -1,5 +1,6 @@
 <?php
 include 'dbInfo.php';
+require_once('DBCOnnectService.php')
 
 function CheckPostMessage(): bool
 {
