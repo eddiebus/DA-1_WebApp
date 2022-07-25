@@ -1,5 +1,14 @@
 <?php
 
-echo json_encode("Hello");
+if (!isset($_POST)){
+    return;
+}
 
+
+$ToGet = $_POST["Type"];
+
+if ($ToGet != null)
+{
+
+}
 ?>

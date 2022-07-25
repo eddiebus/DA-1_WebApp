@@ -63,6 +63,7 @@ img.Header{
     height: 100%;
     background-color: white;
     border-top: solid black 5px;
+    z-index: 100;
 }
 
 div.DataBody_NameHeader{

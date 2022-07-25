@@ -1,7 +1,6 @@
 const containerName = "Mapbox_Map";
 const mapboxToken = "pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow";
 
-
 class Time{
     constructor() {
         this.TimeStart = Date.now()
@@ -94,6 +93,7 @@ class DeviceMarker {
             ToggleDataView(true);
         });
         this.divObject.className = CSS_Style;
+        this.divObject.style.zIndex = 10;
 
         this.markerObject = new mapboxgl.Marker(this.divObject);
         this.markerObject.setLngLat(this.geoJson.geometry.coordinates);
@@ -194,8 +194,9 @@ function MapLoad()
 
 
     $.ajax({
-        type: "GET",
-        url: "PHP//DataGet.php",
+        type: "POST",
+        url: "PHP//DataPost.php",
+        data: "Test Content from AJAX",
         dataType: 'json',
         success: function (data) {
             console.log("AJAX function OK");
