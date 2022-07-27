@@ -103,14 +103,18 @@ class DA1Database{
 
         if (!$result) {
             $this->dbConn->query(
-                "CREATE TABLE [dbo].[LocatePing](
-	[TimeSent] DATETIME NOT NULL PRIMARY KEY, 
-    [Device] VARCHAR(25) NOT NULL FOREIGN KEY REFERENCES [dbo].[Devices]([IMEI]), 
-    [Latitude] INT NOT NULL, 
-    [Longitude] INT NOT NULL, 
-	[Altitude] INT NOT NULL,
-    [Speed] INT NOT NULL, 
-    [SpeedAcc] INT NOT NULL)");
+                "CREATE TABLE [dbo].[LocatePing] (
+    [TimeSent]  DATETIME     NOT NULL,
+    [Device]    VARCHAR (25) NOT NULL,
+	[PingDate]  DATETIME NOT NULL,
+    [Latitude]  INT          NOT NULL,
+    [Longitude] INT          NOT NULL,
+    [Altitude]  INT          NOT NULL,
+    [Speed]     INT          NOT NULL,
+    [SpeedAcc]  INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([TimeSent] ASC),
+    FOREIGN KEY ([Device]) REFERENCES [dbo].[Devices] ([IMEI]));"
+            );
         }
 
     }
