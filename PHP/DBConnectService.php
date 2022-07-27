@@ -76,7 +76,7 @@ class DA1Database{
                 "CREATE TABLE [dbo].[Logs](
     [TimeSent] DATETIME NOT NULL PRIMARY KEY, 
     [MessageType] VARCHAR(10) NOT NULL, 
-    [Message] TEXT NULL)"
+    [Message] TEXT NULL);"
             );
         }
 
@@ -88,11 +88,37 @@ class DA1Database{
         if (!$result) {
             $this->dbConn->query(
                 "CREATE TABLE [dbo].[Devices](
-    [IMEI] TEXT NOT NULL PRIMARY KEY, 
-    [Product_ID] TEXT NULL,
-    [Serial_Number] INT NULL);"
+	[IMEI] VARCHAR(25) NOT NULL PRIMARY KEY, 
+    [Serial_Number] INT NOT NULL, 
+    [Product_ID] INT NOT NULL);"
             );
         }
+
+
+        //Device Location Ping Table
+        $result = $this->dbConn->query(
+            "SELECT 1 FROM [dbo].[LocatePing]"
+        );
+        //Checking if table exist = fail. create table
+
+        if (!$result) {
+            $this->dbConn->query(
+                "CREATE TABLE [dbo].[LocatePing](
+	[TimeSent] DATETIME NOT NULL PRIMARY KEY, 
+    [Device] VARCHAR(25) NOT NULL FOREIGN KEY REFERENCES [dbo].[Devices]([IMEI]), 
+    [Latitude] INT NOT NULL, 
+    [Longitude] INT NOT NULL, 
+	[Altitude] INT NOT NULL,
+    [Speed] INT NOT NULL, 
+    [SpeedAcc] INT NOT NULL)");
+        }
+
+    }
+
+    //Check the capacity of tables. Remove entries if needed
+    private function CheckCapacity()
+    {
+
     }
 
     public function LogRequest(string $msgType){
@@ -115,6 +141,21 @@ class DA1Database{
             echo nl2br("PDO Error: Query failed.");
         }
     }
+
+    public function HandleDeviceMSG()
+    {
+        $msgBody = json_decode(file_get_contents('php://input'));
+        if ($msgBody == null)
+        {
+            return;
+        }
+
+        $IMEI = $msgBody->{'IMEI'};
+        $SerialNO = $msgBody->{'IMEI'};
+        $ProductID = $msgBody->{'ProdID'};
+
+    }
+
     public function AddDevice(){
     }
 

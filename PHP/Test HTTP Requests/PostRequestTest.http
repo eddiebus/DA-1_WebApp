@@ -1,4 +1,4 @@
-POST http://localhost:80/DataPost.php
+POST http://localhost:9960/DataPost.php
 Content-Type: text/plain
 
-{Test Post Requset From PHPStorm}
+{Test Post From PHPStorm}
