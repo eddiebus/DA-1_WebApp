@@ -88,9 +88,9 @@ class DA1Database{
         if (!$result) {
             $this->dbConn->query(
                 "CREATE TABLE [dbo].[Devices](
-    [Serial_Num] INT NOT NULL PRIMARY KEY, 
-    [Product_ID] INT NULL
-                            )"
+    [IMEI] TEXT NOT NULL PRIMARY KEY, 
+    [Product_ID] TEXT NULL,
+    [Serial_Number] INT NULL);"
             );
         }
     }
