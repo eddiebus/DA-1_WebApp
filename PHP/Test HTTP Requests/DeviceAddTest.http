@@ -1,0 +1,51 @@
+POST http://localhost:9960/DevicePing.php
+Content-Type: application/json
+
+{
+  "SerNo": 173340,
+  "IMEI": "35275309167XXXX",
+  "ICCID": "8961018500229963XXXX",
+  "ProdId": 75,
+  "FW": "75.2.2.2",
+  "Records": [
+    {
+      "SeqNo": 31070,
+      "Reason": 11,
+      "DateUTC": "2019-09-20 00:44:18",
+      "Fields": [
+        {
+          "GpsUTC": "2019-09-19 23:43:10",
+          "Lat": -31.9478184,
+          "Long": 115.8195218,
+          "Alt": 16,
+          "Spd": 44,
+          "SpdAcc": 25,
+          "Head": 159,
+          "PDOP": 22,
+          "PosAcc": 21,
+          "GpsStat": 3,
+          "FType": 0
+        },
+        {
+          "Odo": 289391,
+          "RH": 354065,
+          "FType": 27
+        },
+        {
+          "DIn": 0,
+          "DOut": 0,
+          "DevStat": 4,
+          "FType": 2
+        },
+        {
+          "AnalogueData": {
+            "2": 1274,
+            "3": 2546,
+            "4": 19
+          },
+          "FType": 6
+        }
+      ]
+    }
+  ]
+}

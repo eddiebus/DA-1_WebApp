@@ -151,8 +151,16 @@ class DA1Database{
         }
 
         $IMEI = $msgBody->{'IMEI'};
-        $SerialNO = $msgBody->{'IMEI'};
-        $ProductID = $msgBody->{'ProdID'};
+        $SerialNO = $msgBody->{'SerNo'};
+        $ProductID = $msgBody->{'ProdId'};
+        //Data from the device ping
+        $Data = $msgBody->{'Records'}[0]->{'Fields'};
+
+        $outputString = "";
+        echo nl2br("IMEI:".$IMEI).
+            nl2br(" |Serial Number:".$SerialNO).
+            nl2br(" |Product ID:".$ProductID);
+        print_r($Data);
 
     }
 
