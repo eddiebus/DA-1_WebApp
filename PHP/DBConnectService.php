@@ -106,9 +106,9 @@ class DA1Database{
                 "CREATE TABLE [dbo].[LocatePing] (
     [TimeSent]  DATETIME     NOT NULL,
     [Device]    VARCHAR (25) NOT NULL,
-	[PingDate]  DATETIME NOT NULL,
-    [Latitude]  INT          NOT NULL,
-    [Longitude] INT          NOT NULL,
+	[GPSDate]  DATETIME NOT NULL,
+    [Latitude]  FLOAT          NOT NULL,
+    [Longitude] FLOAT          NOT NULL,
     [Altitude]  INT          NOT NULL,
     [Speed]     INT          NOT NULL,
     [SpeedAcc]  INT          NOT NULL,
@@ -148,32 +148,73 @@ class DA1Database{
 
     public function HandleDeviceMSG()
     {
+        $rawMsgBody = file_get_contents('php://input');
         $msgBody = json_decode(file_get_contents('php://input'));
         if ($msgBody == null)
         {
             return;
         }
 
+        echo "Recieved Message: ".$rawMsgBody."<br>";
         $IMEI = $msgBody->{'IMEI'};
         $SerialNO = $msgBody->{'SerNo'};
         $ProductID = $msgBody->{'ProdId'};
         //Data from the device ping
-        $Data = $msgBody->{'Records'}[0]->{'Fields'};
+        $Data = $msgBody->{'Records'}[0]->{'Fields'}[0];
+        $pingDate = $msgBody->{'Records'}[0]->{'DateUTC'};
 
         $outputString = "";
-        echo nl2br("IMEI:".$IMEI).
-            nl2br(" |Serial Number:".$SerialNO).
-            nl2br(" |Product ID:".$ProductID);
-        print_r($Data);
+        echo "IMEI:".$IMEI."<br>".
+            "Serial Number:".$SerialNO."<br>".
+            "Product ID:".$ProductID."<br>";
 
-    }
 
-    public function AddDevice(){
-    }
+        //Check if device is already registered
+        $selectDevice = "SELECT [IMEI] FROM [dbo].[Devices]
+WHERE [IMEI] = '$IMEI';";
+        $selectResult = $this->dbConn->query($selectDevice);
 
-    public function RemoveDevice(){
-    }
+        //Device not listed. Add it.
+        if (count($selectResult->fetchAll()) == 0)
+        {
+            $insertQueryDevice = "INSERT INTO [dbo].[Devices] (IMEI,Serial_Number,Product_ID)
+VALUES ('$IMEI','$SerialNO','$ProductID');";
+            $this->dbConn->query($insertQueryDevice);
+        }
 
-    public function AddDevicePing(){
+
+        $currentTime = date('Y-m-d H:i:s');
+        $deviceGPSPingDate = $Data->{"GpsUTC"};
+        $deviceLat = $Data->{"Lat"};
+        $deviceLong = $Data->{"Long"};
+        $deviceAlt = $Data->{'Alt'};
+        $deviceSpeed = $Data->{'Spd'};
+        $deviceSpdAcc = $Data->{'SpdAcc'};
+
+        //Add this location ping to the database
+        $insertQueryPing = "INSERT INTO [dbo].[LocatePing](
+TimeSent,
+Device,
+GPSDate,
+Latitude,
+Longitude,
+Altitude,
+Speed,
+SpeedAcc
+)
+VALUES (
+'$currentTime',
+'$IMEI',
+'$deviceGPSPingDate',
+'$deviceLat',
+'$deviceLong',
+'$deviceAlt',
+'$deviceSpeed',
+'$deviceSpdAcc'   
+);";
+
+        $this->dbConn->query($insertQueryPing);
+
+        return true;
     }
 }

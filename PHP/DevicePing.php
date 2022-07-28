@@ -2,5 +2,13 @@
 require_once('DBConnectService.php');
 
 $conn = new DA1Database();
-$conn->HandleDeviceMSG();
+
+if ($conn->HandleDeviceMSG())
+{
+    echo http_response_code(200);
+}
+else
+{
+    echo http_response_code(500);
+}
 

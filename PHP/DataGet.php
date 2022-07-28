@@ -5,10 +5,7 @@ if (!isset($_POST)){
 }
 
 
-$ToGet = $_POST["Type"];
+$ToGet = $_POST["Get"];
 
-if ($ToGet != null)
-{
-
-}
+echo $ToGet;
 ?>
