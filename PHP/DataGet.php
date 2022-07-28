@@ -8,4 +8,6 @@ if (!isset($_POST)){
 $ToGet = $_POST["Get"];
 
 echo $ToGet;
+
+
 ?>

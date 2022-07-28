@@ -11,7 +11,6 @@ $dbName = "DA1_DB";
 $dbUserName = "UODThinkOceanAdmin";
 $dbPassword = "taAdmin!";
 
-$LogTableName = "idk";
 
 function CheckPostMessage(): bool
 {
@@ -42,6 +41,7 @@ class DA1Database{
             $dbPassword);
 
             $this->CheckTables();
+            $this->CheckCapacity();
         }
         catch (PDOException $error) {
             echo nl2br("PDO Error: ".$error->getMessage());
@@ -57,6 +57,9 @@ class DA1Database{
     {
         $this->dbConn = null;
     }
+
+    private int $_LogsLimit =  15;
+    private int $_DevicePingLimit = 100;
 
     //Check setup of tables. If tables don't exist, create them
     private function CheckTables()
@@ -122,18 +125,70 @@ class DA1Database{
     //Check the capacity of tables. Remove entries if needed
     private function CheckCapacity()
     {
+        $LogMessageTypeName = "TableLim";
+        if (!$this->dbConn)
+        {
+            return;
+        }
+
+        //Check Logs
+        $selectLogs = "SELECT * FROM [dbo].[Logs];";
+        $selectResult = $this->dbConn->query($selectLogs);
+        $count = count($selectResult->fetchAll());
+        //Too many logs, reduce till under limit
+        if ($count > $this->_LogsLimit){
+            $excess = $count - $this->_LogsLimit;
+            $toDelete = $excess + intval($this->_LogsLimit/3);
+
+            $deleteQuery = "DELETE FROM [dbo].[Logs]
+WHERE [TimeSent] in (
+SELECT TOP $toDelete [TimeSent] FROM [dbo].[Logs]
+ORDER BY [TimeSent] ASC );";
+
+            $this->dbConn->query($deleteQuery);
+
+            $LogMessage = "Removed $toDelete logs to save space in database table [Logs]";
+            $this->LogRequest($LogMessageTypeName,$LogMessage);
+        }
+
+        //Check Device Pings
+        $selectPings = "SELECT * FROM [dbo].[LocatePing];";
+        $selectResult = $this->dbConn->query($selectPings);
+        $count = count($selectResult->fetchAll());
+        //Too many device pings. Remove older pings
+        if ($count > $this->_DevicePingLimit) {
+            $excess = $count - $this->_DevicePingLimit;
+            $toDelete = $excess + intval($this->_LogsLimit / 3);
+
+            $deleteQuery = "DELETE FROM [dbo].[LocatePing]
+WHERE [TimeSent] in (
+SELECT TOP $toDelete [TimeSent] FROM [dbo].[LocatePing]
+ORDER BY [TimeSent] ASC );";
+
+            $this->dbConn->query($deleteQuery);
+
+            $LogMessage = "Removed '$toDelete' Device Pings to save space in database table [LocatePings]";
+            $this->LogRequest($LogMessageTypeName,$LogMessage);
+        }
 
     }
 
-    public function LogRequest(string $msgType){
+    public function LogRequest(string $msgType,string $msg = null){
         if (!$this->dbConn)
         {
             return;
         }
         else
         {
+            sleep(1); //Sleep a second. Make sure a second pass so primary keys don't (time) conflict
             $currentDateTime = date('Y-m-d H:i:s');
-            $message = file_get_contents('php://input');
+            if ($msg == null) {
+                $message = file_get_contents('php://input');
+            }
+            else
+            {
+                $message = $msg;
+            }
             $insertQuery = "
             INSERT INTO [dbo].[Logs] (TimeSent,MessageType,Message)
             VALUES ('$currentDateTime','$msgType','$message');
@@ -143,16 +198,23 @@ class DA1Database{
         if (!$result)
         {
             echo nl2br("PDO Error: Query failed.");
+            echo nl2br($msgType)." ".nl2br($message);
+            print_r($this->dbConn->errorInfo());
         }
     }
 
     public function HandleDeviceMSG()
     {
+        if (!$this->dbConn)
+        {
+            return false;
+        }
+
         $rawMsgBody = file_get_contents('php://input');
         $msgBody = json_decode(file_get_contents('php://input'));
         if ($msgBody == null)
         {
-            return;
+            return false;
         }
 
         echo "Recieved Message: ".$rawMsgBody."<br>";
@@ -162,12 +224,6 @@ class DA1Database{
         //Data from the device ping
         $Data = $msgBody->{'Records'}[0]->{'Fields'}[0];
         $pingDate = $msgBody->{'Records'}[0]->{'DateUTC'};
-
-        $outputString = "";
-        echo "IMEI:".$IMEI."<br>".
-            "Serial Number:".$SerialNO."<br>".
-            "Product ID:".$ProductID."<br>";
-
 
         //Check if device is already registered
         $selectDevice = "SELECT [IMEI] FROM [dbo].[Devices]
@@ -181,7 +237,6 @@ WHERE [IMEI] = '$IMEI';";
 VALUES ('$IMEI','$SerialNO','$ProductID');";
             $this->dbConn->query($insertQueryDevice);
         }
-
 
         $currentTime = date('Y-m-d H:i:s');
         $deviceGPSPingDate = $Data->{"GpsUTC"};
@@ -215,6 +270,9 @@ VALUES (
 
         $this->dbConn->query($insertQueryPing);
 
+
+        $LogString = "Added device of IMEI: '$IMEI'";
+        $this->LogRequest($LogString);
         return true;
     }
 }
