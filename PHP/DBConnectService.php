@@ -307,7 +307,6 @@ VALUES (
         {
             $rowIMEI = $row['IMEI'];
             $returnJSON[] =  "$rowIMEI";
-            echo $returnJSON;
         }
         return $returnJSON;
     }
