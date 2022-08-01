@@ -197,6 +197,9 @@ function MapLoad()
         dataType: 'json',
         success: function (data) {
             console.log("AJAX Get OK");
+            for (let i = 0; i < data.length;i++){
+                console.log(data[i]);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
