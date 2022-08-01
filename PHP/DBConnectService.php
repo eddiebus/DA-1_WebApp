@@ -197,8 +197,6 @@ ORDER BY [TimeSent] ASC );";
         $result =  $this->dbConn->query($insertQuery);
         if (!$result)
         {
-            echo nl2br("PDO Error: Query failed.");
-            echo nl2br($msgType)." ".nl2br($message);
             print_r($this->dbConn->errorInfo());
         }
     }

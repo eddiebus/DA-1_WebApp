@@ -202,7 +202,7 @@ function MapLoad()
 
     //Get Device Location Data
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "PHP//DataGet.php",
         data: `{
             "GET": "IMEI",
