@@ -1,4 +1,4 @@
-POST http://localhost:9960/DataGet.php
+GET http://localhost:9960/DataGet.php
 Content-Type: application/json
 
 {
