@@ -8,7 +8,6 @@ class Time{
         this.DeltaCurrent = 0;
 
         this.DeltaTime = 0;
-
     }
 
     Tick(){
@@ -21,11 +20,7 @@ class Time{
 let timeObject = new Time();
 
 
-let PasTime = Date.now();
-let DeltaTime = 0
-
-
-
+//State & Info of mapbox map
 const mapboxMap = {
     map : null,
     mapDebug : false,
@@ -33,8 +28,8 @@ const mapboxMap = {
 }
 
 let map = null;
-const MapDebug = false;
 
+//State of Data View Box
 let DataView = {
     isActive: false,
     AnimationDelta: 0
@@ -111,7 +106,6 @@ class DeviceMarker {
 
 //GeoJson of Device Points
 const DevicePoints = [];
-
 
 
 function SetDevicePoints() {
@@ -196,7 +190,7 @@ function MapLoad()
     $.ajax({
         type: "POST",
         url: "PHP//DataPost.php",
-        data: "Test Content from AJAX",
+        data: "Client Loaded Webpage",
         dataType: 'json',
         success: function (data) {
             console.log("AJAX function OK");
@@ -205,6 +199,24 @@ function MapLoad()
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
+
+    //Get Device Location Data
+    $.ajax({
+        type: "POST",
+        url: "PHP//DataGet.php",
+        data: `{
+            "GET": "IMEI",
+            "TARGET_IMEI" : "NONE"
+        }`,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
+        }
+    });
+
 
 
     requestAnimationFrame(MapSystemUpdate);
