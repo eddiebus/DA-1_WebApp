@@ -209,13 +209,13 @@ function MapLoad()
         }`,
         dataType: 'json',
         success: function (data) {
-            console.log(data);
-            console.log(JSON.parse(`${data}`));
+            console.log("AJAX Get OK");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
+
 
 
 
