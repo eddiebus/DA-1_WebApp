@@ -194,7 +194,7 @@ function MapLoad()
             "GET": "IMEI",
             "TARGET_IMEI" : "NONE"
         }`,
-        dataType: 'text',
+        dataType: 'json',
         success: function (data) {
             console.log("AJAX Get OK");
         },
