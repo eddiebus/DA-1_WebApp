@@ -1,0 +1,7 @@
+POST http://localhost:9960/DataGet.php
+Content-Type: application/json
+
+{
+  "GET": "IMEI",
+  "TARGET_IMEI" : "NONE"
+}

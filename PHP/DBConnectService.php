@@ -12,6 +12,7 @@ $dbUserName = "UODThinkOceanAdmin";
 $dbPassword = "taAdmin!";
 
 
+
 function CheckPostMessage(): bool
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -25,9 +26,8 @@ function CheckPostMessage(): bool
 }
 
 class DA1Database{
-
     //Database Connection
-    private $dbConn = null;
+    private ?PDO $dbConn = null;
     public function __construct()
     {
         global $dbAddress;
@@ -203,7 +203,34 @@ ORDER BY [TimeSent] ASC );";
         }
     }
 
-    public function HandleDeviceMSG()
+    //Handle Request to Get Data
+    /*
+     * JSON Style
+     * {
+     *  GET : "IMEI","LOCATE"
+     *  TARGET_IMEI: "IMEI_NAME"
+     * }
+     * */
+    public function HandleGetMSG() {
+        $bodyMSGJSON = json_decode(file_get_contents('php://input'));
+        $task = $bodyMSGJSON->{'GET'};
+        $targetIMEI = $bodyMSGJSON->{'TARGET_IMEI'};
+
+        $result = null;
+        //Get result;
+        switch ($task){
+            case 'IMEI':
+                $result = $this->GetDeviceIMEI();
+                break;
+            case 'LOCATE':
+                $result = $this->GetDeviceLocation($targetIMEI);
+                break;
+        }
+
+        return json_encode($result);
+    }
+
+    public function HandleDeviceMSG(): bool
     {
         if (!$this->dbConn)
         {
@@ -216,8 +243,6 @@ ORDER BY [TimeSent] ASC );";
         {
             return false;
         }
-
-        echo "Recieved Message: ".$rawMsgBody."<br>";
         $IMEI = $msgBody->{'IMEI'};
         $SerialNO = $msgBody->{'SerNo'};
         $ProductID = $msgBody->{'ProdId'};
@@ -269,10 +294,34 @@ VALUES (
 );";
 
         $this->dbConn->query($insertQueryPing);
-
-
-        $LogString = "Added device of IMEI: '$IMEI'";
-        $this->LogRequest($LogString);
         return true;
+    }
+
+    public function GetDeviceIMEI()
+    {
+        $selectQuery = "SELECT * FROM [dbo].[Devices]";
+
+        $queryResult = $this->dbConn->query($selectQuery);
+        $returnJSON = array();
+        foreach ($queryResult as $row)
+        {
+            $rowIMEI = $row['IMEI'];
+            $returnJSON[] =  $rowIMEI;
+        }
+        return $returnJSON;
+    }
+
+    public function GetDeviceLocation(string $TargetIMEI)
+    {
+        $selectQuery = "SELECT * FROM [dbo].[LocatePing]
+WHERE [Device] = '$TargetIMEI'";
+        $queryResult = $this->dbConn->query($selectQuery);
+        $returnArray = array();
+
+        foreach ($queryResult as $row){
+            $returnArray[] = $row;
+        }
+
+        return $returnArray;
     }
 }

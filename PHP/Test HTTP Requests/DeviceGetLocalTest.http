@@ -1,0 +1,7 @@
+POST http://localhost:9960/DataGet.php
+Content-Type: application/json
+
+{
+  "GET": "LOCATE",
+  "TARGET_IMEI" : "35275309167XXXX"
+}

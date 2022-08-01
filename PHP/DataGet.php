@@ -1,13 +1,6 @@
 <?php
-
-if (!isset($_POST)){
-    return;
-}
+require_once('DBConnectService.php');
 
 
-$ToGet = $_POST["Get"];
-
-echo $ToGet;
-
-
-?>
+$conn = new DA1Database();
+echo $conn->HandleGetMSG();
