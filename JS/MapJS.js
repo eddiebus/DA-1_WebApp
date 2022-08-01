@@ -191,7 +191,6 @@ function MapLoad()
         type: "POST",
         url: "PHP//DataPost.php",
         data: "Client Loaded Webpage",
-        dataType: 'json',
         success: function (data) {
             console.log("AJAX function OK");
         },
@@ -202,7 +201,7 @@ function MapLoad()
 
     //Get Device Location Data
     $.ajax({
-        type: "GET",
+        type: 'GET',
         url: "PHP//DataGet.php",
         data: `{
             "GET": "IMEI",
