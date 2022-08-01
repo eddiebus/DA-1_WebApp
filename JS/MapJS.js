@@ -186,19 +186,6 @@ function MapLoad()
 
     SetDevicePoints();
 
-
-    $.ajax({
-        type: "POST",
-        url: "PHP//DataPost.php",
-        data: "Client Loaded Webpage",
-        success: function (data) {
-            console.log("AJAX function OK");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
-        }
-    });
-
     //Get Device Location Data
     $.ajax({
         type: 'GET',
@@ -207,7 +194,7 @@ function MapLoad()
             "GET": "IMEI",
             "TARGET_IMEI" : "NONE"
         }`,
-        dataType: 'json',
+        dataType: 'text',
         success: function (data) {
             console.log("AJAX Get OK");
         },
@@ -215,9 +202,6 @@ function MapLoad()
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
-
-
-
 
     requestAnimationFrame(MapSystemUpdate);
 

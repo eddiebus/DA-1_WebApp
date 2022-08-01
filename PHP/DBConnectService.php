@@ -304,7 +304,7 @@ VALUES (
         foreach ($queryResult as $row)
         {
             $rowIMEI = $row['IMEI'];
-            $returnJSON[] =  "$rowIMEI";
+            $returnJSON[] =  $rowIMEI;
         }
         return $returnJSON;
     }
