@@ -118,10 +118,13 @@ function SetDevicePoints() {
     $.ajax({
         type: 'GET',
         url: "PHP//DataGet.php",
-        data: `{
-            "GET": "IMEI",
-            "TARGET_IMEI" : "NONE"
-        }`,
+        data:  JSON.stringify(
+            {
+                "GET": "IMEI",
+                "TARGET_IMEI" : "NONE"
+            }
+        ),
+        processData: false,
         dataType: 'json',
         async: false,
         success: function (data) {
