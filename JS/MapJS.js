@@ -124,7 +124,6 @@ function SetDevicePoints() {
                 "TARGET_IMEI" : "NONE"
             }
         ),
-        processData: false,
         dataType: 'json',
         async: false,
         success: function (data) {
