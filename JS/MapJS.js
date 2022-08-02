@@ -116,7 +116,7 @@ function SetDevicePoints() {
     let DeviceLocation = [];
 
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: "PHP//DataGet.php",
         data: `{
             "GET": "IMEI",
@@ -139,11 +139,11 @@ function SetDevicePoints() {
         //Get Location history of that device
         $.ajax(
             {
-            type: 'POST',
+            type: 'GET',
             url: "PHP//DataGet.php",
             data: `{
             "GET": "LOCATE",
-            "TARGET_IMEI" : ${DeviceIMEI[i]}
+            "TARGET_IMEI" : "${DeviceIMEI[i]}" 
             }`,
                 dataType: 'json',
                 async: false,
