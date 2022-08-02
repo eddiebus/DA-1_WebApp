@@ -22,7 +22,7 @@ let timeObject = new Time();
 //State & Info of mapbox map
 const mapboxMap = {
     map : null,
-    mapDebug : false,
+    mapDebug : true,
     deviceMarkers: []
 }
 
@@ -183,9 +183,9 @@ function SetDevicePoints() {
         }
     )
 
-    for (const feat of TestDevicePoints){
+    for (const point of DeviceLocation){
 
-        let marker = new DeviceMarker("Test",'mapMarker',TestDevicePoints);
+        let marker = new DeviceMarker("Test",'mapMarker',point);
         mapboxMap.deviceMarkers.push(marker);
         marker.SetToMap(mapboxMap.map);
     }
@@ -274,7 +274,7 @@ function MapLoad()
 
 function MapDebugLog()
 {
-    if (mapboxMap.MapDebug == true) {
+    if (mapboxMap.mapDebug == true) {
         let position = mapboxMap.map.getCenter();
         console.log("Map Debug:\n" +
             `Map Pos: ${position}`)
