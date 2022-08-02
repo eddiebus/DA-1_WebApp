@@ -136,9 +136,6 @@ function SetDevicePoints() {
 
     for (let i = 0; i < DeviceIMEI.length; i++)
     {
-        //2D Array holding devices and their location history
-        let locationHistory = [];
-
         //Get Location history of that device
         $.ajax(
             {
@@ -153,7 +150,7 @@ function SetDevicePoints() {
 
                 success: function (data) {
                 //Add array to History array
-                locationHistory.push(data);
+                DeviceLocation.push(data);
             },
                 error: function (jqXHR, textStatus, errorThrown) {
                 console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
