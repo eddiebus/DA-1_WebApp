@@ -128,8 +128,8 @@ function SetDevicePoints() {
         dataType: 'json',
         async: false,
         success: function (data) {
-            for (let i = 0; i < data.length;i++){
-                DeviceIMEI.push(data[i]);
+            for (const part of data){
+                DeviceIMEI.push(part);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
