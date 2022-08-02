@@ -128,9 +128,7 @@ function SetDevicePoints() {
         dataType: 'json',
         async: false,
         success: function (data) {
-            for (const part of data){
-                DeviceIMEI.push(part);
-            }
+            console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
@@ -228,45 +226,6 @@ function MapLoad()
     mapboxMap.map.addControl(GeoLocateControl);
 
     SetDevicePoints();
-
-    //Get Device Location Data
-    $.ajax({
-        type: 'POST',
-        url: "PHP//DataGet.php",
-        data: `{
-            "GET": "IMEI",
-            "TARGET_IMEI" : "NONE"
-        }`,
-        dataType: 'json',
-        success: function (data) {
-            console.log("AJAX Get OK");
-            for (let i = 0; i < data.length;i++){
-                console.log(data[i]);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
-        }
-    });
-
-    $.ajax({
-        type: 'POST',
-        url: "PHP//DataGet.php",
-        data: `{
-            "GET": "LOCATE",
-            "TARGET_IMEI" : "35275309167XXXX"
-        }`,
-        dataType: 'json',
-        success: function (data) {
-            console.log("AJAX Get OK");
-            for (let i = 0; i < data.length;i++){
-                console.log(data[i]);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
-        }
-    });
 
     requestAnimationFrame(MapSystemUpdate);
 
