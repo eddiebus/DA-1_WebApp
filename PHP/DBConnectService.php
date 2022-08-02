@@ -312,7 +312,8 @@ VALUES (
     public function GetDeviceLocation(string $TargetIMEI)
     {
         $selectQuery = "SELECT * FROM [dbo].[LocatePing]
-WHERE [Device] = '$TargetIMEI'";
+WHERE [Device] = '$TargetIMEI'
+ORDER BY [TimeSent] DESC";
         $queryResult = $this->dbConn->query($selectQuery);
         $returnArray = array();
 

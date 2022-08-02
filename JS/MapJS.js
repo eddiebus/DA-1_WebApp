@@ -19,7 +19,6 @@ class Time{
 
 let timeObject = new Time();
 
-
 //State & Info of mapbox map
 const mapboxMap = {
     map : null,
@@ -27,14 +26,14 @@ const mapboxMap = {
     deviceMarkers: []
 }
 
-let map = null;
-
 //State of Data View Box
 let DataView = {
     isActive: false,
     AnimationDelta: 0
 };
 
+
+//Triggers in detail tracker view
 function ToggleDataView(toggleBool)
 {
     DataView.isActive = toggleBool;
@@ -75,13 +74,7 @@ function UpdateDataView(){
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
         this.Name = Name;
-        this.geoJson = {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: positionArray
-            }
-        }
+        this.LocationJSON = positionArray;
 
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){
@@ -91,7 +84,12 @@ class DeviceMarker {
         this.divObject.style.zIndex = 10;
 
         this.markerObject = new mapboxgl.Marker(this.divObject);
-        this.markerObject.setLngLat(this.geoJson.geometry.coordinates);
+
+        //Set as most recent location
+        let mostRecentGPS = this.LocationJSON[0];
+        this.markerObject.setLngLat(
+            [mostRecentGPS["Longitude"],mostRecentGPS["Latitude"]]
+        );
     }
 
     SetToMap(map)
@@ -104,48 +102,93 @@ class DeviceMarker {
     }
 }
 
+
+
+
 //GeoJson of Device Points
-const DevicePoints = [];
+const TestDevicePoints = [];
+
 
 
 function SetDevicePoints() {
-    DevicePoints.push(
-        {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [-1.499929041558289, 52.937081787318014]
-            },
-            properties: {
-                title: 'University of Derby',
-                description: ''
+    //All IMEI of each device
+    let DeviceIMEI = [];
+    let DeviceLocation = [];
+
+    $.ajax({
+        type: 'POST',
+        url: "PHP//DataGet.php",
+        data: `{
+            "GET": "IMEI",
+            "TARGET_IMEI" : "NONE"
+        }`,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            for (let i = 0; i < data.length;i++){
+                DeviceIMEI.push(data[i]);
             }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
+        }
+    });
+
+    for (let i = 0; i < DeviceIMEI.length; i++)
+    {
+        //2D Array holding devices and their location history
+        let locationHistory = [];
+
+        //Get Location history of that device
+        $.ajax(
+            {
+            type: 'POST',
+            url: "PHP//DataGet.php",
+            data: `{
+            "GET": "LOCATE",
+            "TARGET_IMEI" : ${DeviceIMEI[i]}
+            }`,
+                dataType: 'json',
+                async: false,
+
+                success: function (data) {
+                //Add array to History array
+                locationHistory.push(data);
+            },
+                error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
+            }
+        });
+
+    }
+
+    TestDevicePoints.push(
+        {
+            "0": "2022-07-28 15:16:34.000",
+            "1": "35275309167XXXX",
+            "2": "2019-09-19 23:43:10.000",
+            "3": "-31.947818399999999",
+            "4": "115.8195218",
+            "5": "16",
+            "6": "44",
+            "7": "25",
+            "TimeSent": "2022-07-28 15:16:34.000",
+            "Device": "35275309167XXXX",
+            "GPSDate": "2019-09-19 23:43:10.000",
+            "Latitude": "-31.947818399999999",
+            "Longitude": "115.8195218",
+            "Altitude": "16",
+            "Speed": "44",
+            "SpeedAcc": "25"
         }
     )
 
-    DevicePoints.push(
-        {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [-1.4972090207276096, 52.93112236482739]
-            },
-            properties: {
-                title: 'University of Derby - MS Campus',
-                description: ''
-            }
-        }
-    )
+    for (const feat of TestDevicePoints){
 
-    for (const feat of DevicePoints){
-        const element = document.createElement('div');
-        element.className = 'mapMarker';
-
-        let marker = new DeviceMarker("Test",'mapMarker',feat.geometry.coordinates);
+        let marker = new DeviceMarker("Test",'mapMarker',TestDevicePoints);
         mapboxMap.deviceMarkers.push(marker);
         marker.SetToMap(mapboxMap.map);
     }
-
 
 }
 
@@ -162,7 +205,7 @@ function MapLoad()
     });
 
     mapboxMap.map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
+        mapboxMap.map.setFog({}); // Set the default atmosphere style
     });
 
     //Disable Map Rotation
@@ -232,7 +275,7 @@ function MapLoad()
 function MapDebugLog()
 {
     if (mapboxMap.MapDebug == true) {
-        let position = map.getCenter();
+        let position = mapboxMap.map.getCenter();
         console.log("Map Debug:\n" +
             `Map Pos: ${position}`)
     }
