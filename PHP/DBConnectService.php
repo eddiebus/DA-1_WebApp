@@ -210,7 +210,8 @@ ORDER BY [TimeSent] ASC );";
         {
             $result = $this->GetDeviceIMEI();
         }
-        return json_encode($result);
+
+        return $result;
     }
 
     public function HandleDeviceMSG(): bool

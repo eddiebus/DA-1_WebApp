@@ -22,7 +22,7 @@ let timeObject = new Time();
 //State & Info of mapbox map
 const mapboxMap = {
     map : null,
-    mapDebug : true,
+    mapDebug : false,
     deviceMarkers: []
 }
 
@@ -117,10 +117,10 @@ function SetDevicePoints() {
 
     //Get all Devices IMEI
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php",
         dataType: 'jsonp',
-        async: false,
+        contentType: "application/json",
         success: function (data) {
             console.log(data);
         },
@@ -129,29 +129,6 @@ function SetDevicePoints() {
         }
     });
 
-    for (let i = 0; i < DeviceIMEI.length; i++)
-    {
-        //Get Location history of that device
-        $.ajax(
-            {
-            type: 'GET',
-            url: `https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php?Device=${DeviceIMEI[i]}`,
-            data: `{
-            "GET": "LOCATE",
-            "TARGET_IMEI" : "${DeviceIMEI[i]}" 
-            }`,
-                dataType: 'jsonp',
-                async: false,
-
-                success: function (data) {
-                //Add array to History array
-                DeviceLocation.push(data);
-            },
-                error: function (jqXHR, textStatus, errorThrown) {
-                console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
-            }
-        });
-    }
 
     TestDevicePoints.push(
         {
