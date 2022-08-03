@@ -115,14 +115,10 @@ function SetDevicePoints() {
     let DeviceIMEI = [];
     let DeviceLocation = [];
 
+    //Get all Devices IMEI
     $.ajax({
         type: 'GET',
-        url: "https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php?param="+JSON.stringify(
-            {
-                "GET": "IMEI",
-                "TARGET_IMEI" : "NONE"
-            }
-        ),
+        url: "https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php",
         dataType: 'jsonp',
         async: false,
         success: function (data) {
@@ -139,12 +135,12 @@ function SetDevicePoints() {
         $.ajax(
             {
             type: 'GET',
-            url: "PHP//DataGet.php",
+            url: `https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php?Device=${DeviceIMEI[i]}`,
             data: `{
             "GET": "LOCATE",
             "TARGET_IMEI" : "${DeviceIMEI[i]}" 
             }`,
-                dataType: 'json',
+                dataType: 'jsonp',
                 async: false,
 
                 success: function (data) {
@@ -155,7 +151,6 @@ function SetDevicePoints() {
                 console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
             }
         });
-
     }
 
     TestDevicePoints.push(
@@ -185,7 +180,6 @@ function SetDevicePoints() {
         mapboxMap.deviceMarkers.push(marker);
         marker.SetToMap(mapboxMap.map);
     }
-
 }
 
 //Set up the Mapbox Map

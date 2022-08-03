@@ -11,8 +11,6 @@ $dbName = "DA1_DB";
 $dbUserName = "UODThinkOceanAdmin";
 $dbPassword = "taAdmin!";
 
-
-
 function CheckPostMessage(): bool
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -22,12 +20,14 @@ function CheckPostMessage(): bool
     else {
         return FALSE;
     }
-
 }
 
 class DA1Database{
     //Database Connection
     private ?PDO $dbConn = null;
+    private int $_LogsLimit =  15;
+    private int $_DevicePingLimit = 100;
+
     public function __construct()
     {
         global $dbAddress;
@@ -57,9 +57,6 @@ class DA1Database{
     {
         $this->dbConn = null;
     }
-
-    private int $_LogsLimit =  15;
-    private int $_DevicePingLimit = 100;
 
     //Check setup of tables. If tables don't exist, create them
     private function CheckTables()
@@ -201,30 +198,18 @@ ORDER BY [TimeSent] ASC );";
         }
     }
 
-    //Handle Request to Get Data
-    /*
-     * JSON Style
-     * {
-     *  GET : "IMEI","LOCATE"
-     *  TARGET_IMEI: "IMEI_NAME"
-     * }
-     * */
     public function HandleGetMSG() {
-        $bodyMSGJSON = json_decode(file_get_contents('php://input'));
-        $task = $bodyMSGJSON->{'GET'};
-        $targetIMEI = $bodyMSGJSON->{'TARGET_IMEI'};
-
         $result = null;
-        //Get result;
-        switch ($task){
-            case 'IMEI':
-                $result = $this->GetDeviceIMEI();
-                break;
-            case 'LOCATE':
-                $result = $this->GetDeviceLocation($targetIMEI);
-                break;
-        }
+        //Check if device is set
+        //If so we search for its location history
+        if (isset($_GET["Device"])){
 
+            $result = $this->GetDeviceLocation($_GET["Device"]);
+        }
+        else
+        {
+            $result = $this->GetDeviceIMEI();
+        }
         return json_encode($result);
     }
 
@@ -295,10 +280,9 @@ VALUES (
         return true;
     }
 
-    public function GetDeviceIMEI()
+    public function GetDeviceIMEI(): array
     {
         $selectQuery = "SELECT * FROM [dbo].[Devices]";
-
         $queryResult = $this->dbConn->query($selectQuery);
         $returnJSON = array();
         foreach ($queryResult as $row)
@@ -309,17 +293,16 @@ VALUES (
         return $returnJSON;
     }
 
-    public function GetDeviceLocation(string $TargetIMEI)
+    public function GetDeviceLocation(string $TargetIMEI): array
     {
         $selectQuery = "SELECT * FROM [dbo].[LocatePing]
-WHERE [Device] = '$TargetIMEI'";
+         WHERE [Device] = '$TargetIMEI'";
         $queryResult = $this->dbConn->query($selectQuery);
         $returnArray = array();
 
         foreach ($queryResult as $row){
             $returnArray[] = $row;
         }
-
         return $returnArray;
     }
 }
