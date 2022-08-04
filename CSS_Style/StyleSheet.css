@@ -22,16 +22,21 @@ body {
 
 h1{
     display: inline-block;
+
     /*Font and positioning*/
     font-family: Oswald, Arial, Helvetica, sans-serif;
     font-size: 30px;
-    transform: translateY(-45%);
+
     width: 50%;
     height: 50px;
+
     margin-left: 10px;
-    overflow: clip;
-    animation-name: FadeIn;
-    animation-duration: 2s;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    animation: FadeIn 1.5s, SlideIn_Left 1.5s;
+
+
 }
 
 p{
@@ -47,15 +52,23 @@ div.Header{
     border-bottom: 3px solid black;
 
     overflow: clip;
+
 }
 
 img.Header{
+    display: block;
     height: 30px;
     width: auto;
-    margin-right: 8px;
-    transform: translateY(+25%);
+
+
+    margin: 8px;
+    vertical-align: baseline;
+
     float: right;
     overflow: clip;
+
+    animation: FadeIn 1.5s, SlideIn_Left 1.5s;
+
 }
 
 img.Header:hover{
@@ -95,7 +108,6 @@ div.DataBody_Info{
     height: calc(20%);
     background-color: grey;
 }
-
 
 .mapMarker {
     background-image: url("MapIcons/mapbox-marker-icon-20px-green.png");

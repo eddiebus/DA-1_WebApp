@@ -8,3 +8,14 @@
         opacity: 1;
     }
 }
+
+@keyframes SlideIn_Left {
+    0%{
+        transform: translateX(-100px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+
+}

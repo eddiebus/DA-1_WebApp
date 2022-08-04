@@ -32,7 +32,6 @@ let DataView = {
     AnimationDelta: 0
 };
 
-
 //Triggers in detail tracker view
 function ToggleDataView(toggleBool)
 {
