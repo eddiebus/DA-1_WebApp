@@ -25,7 +25,10 @@ function CheckPostMessage(): bool
 class DA1Database{
     //Database Connection
     private ?PDO $dbConn = null;
-    private int $_LogsLimit =  15;
+
+    //Limits of data in the Database
+    //This is to save data and not exceed Microsoft Azure Limits
+    private int $_LogsLimit =  50;
     private int $_DevicePingLimit = 100;
 
     public function __construct()

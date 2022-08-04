@@ -1,4 +1,6 @@
-﻿/*Create Custom Fonts*/
+﻿@import "AnimationSheet.css";
+
+/*Create Custom Fonts*/
 @font-face {
     font-family: Oswald;
     src: url("Fonts/Oswald/Oswald-Regular.ttf");
@@ -27,8 +29,9 @@ h1{
     width: 50%;
     height: 50px;
     margin-left: 10px;
-
     overflow: clip;
+    animation-name: FadeIn;
+    animation-duration: 2s;
 }
 
 p{
@@ -53,6 +56,10 @@ img.Header{
     transform: translateY(+25%);
     float: right;
     overflow: clip;
+}
+
+img.Header:hover{
+    opacity: 0.5;
 }
 
 .DataBody{
@@ -94,8 +101,8 @@ div.DataBody_Info{
     background-image: url("MapIcons/mapbox-marker-icon-20px-green.png");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 5vw;
-    height: 5vh;
+    width: 8vw;
+    height: 8vh;
     cursor: pointer;
 }
 

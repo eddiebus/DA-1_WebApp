@@ -70,7 +70,6 @@ function UpdateDataView(){
     }
 }
 
-
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
         this.Name = Name;
@@ -102,22 +101,22 @@ class DeviceMarker {
     }
 }
 
-
-
-
 //GeoJson of Device Points
 const TestDevicePoints = [];
 
-
-
-function SetDevicePoints() {
-    //All IMEI of each device
-    let DeviceIMEI = [];
-    let DeviceLocation = [];
-
-    function GetLocation(DeviceNames)
+function SetDeviceMarkers() {
+    //Nested function to add markers to map
+    //This function to be used once data has been retrieved
+    function AddMarkers(DeviceData)
     {
+        for (let device  = 0; device < DeviceData.length; device++)
+        {
+            let locationData = DeviceData[device][1];
+            let marker = new DeviceMarker("Test",'mapMarker',locationData);
+            mapboxMap.deviceMarkers.push(marker);
+            marker.SetToMap(mapboxMap.map);
 
+        }
     }
     //Get all Devices IMEI
     $.ajax({
@@ -125,61 +124,13 @@ function SetDevicePoints() {
         url: "https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php",
         dataType: 'jsonp',
         contentType: "application/json",
-        async: false,
         success: function (data) {
-            console.log(data);
-            DeviceIMEI = data;
+            AddMarkers(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
-
-    for (let i = 0; i < DeviceIMEI.length; i++)
-    {
-        //Get Location history of that device
-        $.ajax({
-            type: 'GET',
-            url: `https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php?Device=${DeviceIMEI[i]}`,
-            dataType: 'jsonp',
-            async: false,
-            success: function (data) {
-                //Add array to History array
-                DeviceLocation.push(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("AJAX Error: " + jqXHR + '\n' + textStatus + '\n' + errorThrown);
-            }
-        });
-    }
-
-    TestDevicePoints.push(
-        {
-            "0": "2022-07-28 15:16:34.000",
-            "1": "35275309167XXXX",
-            "2": "2019-09-19 23:43:10.000",
-            "3": "-31.947818399999999",
-            "4": "115.8195218",
-            "5": "16",
-            "6": "44",
-            "7": "25",
-            "TimeSent": "2022-07-28 15:16:34.000",
-            "Device": "35275309167XXXX",
-            "GPSDate": "2019-09-19 23:43:10.000",
-            "Latitude": "-31.947818399999999",
-            "Longitude": "115.8195218",
-            "Altitude": "16",
-            "Speed": "44",
-            "SpeedAcc": "25"
-        }
-    )
-
-    for (const point of DeviceLocation){
-
-        let marker = new DeviceMarker("Test",'mapMarker',point);
-        mapboxMap.deviceMarkers.push(marker);
-        marker.SetToMap(mapboxMap.map);
-    }
 }
 
 //Set up the Mapbox Map
@@ -217,8 +168,7 @@ function MapLoad()
 
     mapboxMap.map.addControl(GeoLocateControl);
 
-    SetDevicePoints();
-
+    SetDeviceMarkers();
     requestAnimationFrame(MapSystemUpdate);
 
 }
