@@ -115,20 +115,43 @@ function SetDevicePoints() {
     let DeviceIMEI = [];
     let DeviceLocation = [];
 
+    function GetLocation(DeviceNames)
+    {
+
+    }
     //Get all Devices IMEI
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: "https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php",
         dataType: 'jsonp',
         contentType: "application/json",
+        async: false,
         success: function (data) {
             console.log(data);
+            DeviceIMEI = data;
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error: "+jqXHR + '\n' + textStatus + '\n' + errorThrown);
         }
     });
 
+    for (let i = 0; i < DeviceIMEI.length; i++)
+    {
+        //Get Location history of that device
+        $.ajax({
+            type: 'GET',
+            url: `https://eddiebus-da1.azurewebsites.net/PHP/DataGet.php?Device=${DeviceIMEI[i]}`,
+            dataType: 'jsonp',
+            async: false,
+            success: function (data) {
+                //Add array to History array
+                DeviceLocation.push(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: " + jqXHR + '\n' + textStatus + '\n' + errorThrown);
+            }
+        });
+    }
 
     TestDevicePoints.push(
         {

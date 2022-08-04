@@ -199,19 +199,7 @@ ORDER BY [TimeSent] ASC );";
     }
 
     public function HandleGetMSG() {
-        $result = null;
-        //Check if device is set
-        //If so we search for its location history
-        if (isset($_GET["Device"])){
-
-            $result = $this->GetDeviceLocation($_GET["Device"]);
-        }
-        else
-        {
-            $result = $this->GetDeviceIMEI();
-        }
-
-        return $result;
+        return $this->GetDeviceData();
     }
 
     public function HandleDeviceMSG(): bool
@@ -281,17 +269,35 @@ VALUES (
         return true;
     }
 
-    public function GetDeviceIMEI(): array
+    public function GetDeviceData(): array
     {
-        $selectQuery = "SELECT * FROM [dbo].[Devices]";
-        $queryResult = $this->dbConn->query($selectQuery);
-        $returnJSON = array();
+        $selectDeviceQuery = "SELECT * FROM [dbo].[Devices]";
+        $queryResult = $this->dbConn->query($selectDeviceQuery);
+        $returnData = array();
         foreach ($queryResult as $row)
         {
+            //Get IMEI
+            $DeviceIMEI = $row['IMEI'];
+
+            $newObject = [];
+            $newObject[] = $DeviceIMEI;
+
+            //Search for location
+            $selectDataQuery = "SELECT * FROM [dbo].[LocatePing]
+         WHERE [Device] = '$DeviceIMEI'";
+
+            $queryResult = $this->dbConn->query($selectDataQuery);
+            $dataArray = [];
+            foreach($queryResult as $dataRow)
+            {
+                $dataArray[] = $dataRow;
+            }
+
+            $newObject[] = $dataArray;
             $rowIMEI = $row['IMEI'];
-            $returnJSON[] =  $rowIMEI;
+            $returnData[] =  $newObject;
         }
-        return $returnJSON;
+        return $returnData;
     }
 
     public function GetDeviceLocation(string $TargetIMEI): array
