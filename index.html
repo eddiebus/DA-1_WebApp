@@ -19,26 +19,33 @@
 </head>
 <body>
     <!--Main Title/ Header-->
-    <div class="Header">
-        <!--Title-->
-        <h1>DA-1 Finder</h1>
 
-        <!--Image Links-->
-        <a href="https://www.lubrizol.com/" target="_blank">
-            <img src="Assets/Logos/Lubrizol-Logo.jpg" class ="Header">
-        </a>
 
-        <a href="https://thinkocean.earth/" target="_blank">
-            <img src="Assets/Logos/Think_Ocean.png" class = "Header">
-        </a>
-    </div>
+    <div id='Mapbox_Map' style='width: 100%; height: 100vh;background-color: #74cdef'>
+        <div class="Header" style="position: relative">
+            <!--Title-->
+            <h1>DA-1 Finder</h1>
 
-    <div id='Mapbox_Map' style='width: 100%; height: calc(100vh - 50px);background-color: #74cdef'>
-        <div id="DataView" class="DataBody">
-            <div id="DataView Close" style="margin-top: 20px;margin-right: 10px;width: 50px;height: 5%; background-color: red; float: right" onclick="ToggleDataView(false)"></div>
-            <div id="DataView Name" class ="DataBody_NameHeader">
+            <!--Image Links-->
+            <a href="https://www.lubrizol.com/" target="_blank">
+                <img src="Assets/Logos/Lubrizol-Logo.jpg" class ="Header">
+            </a>
+
+            <a href="https://thinkocean.earth/" target="_blank">
+                <img src="Assets/Logos/Think_Ocean.png" class = "Header">
+            </a>
+        </div>
+
+        <div id="DataView" class="DataView">
+            <!--Close button. Closes DataView through JS-->
+
+            <div style="width: calc(100% - 10px);height: 50px; margin-top: 20px">
+                <div id="DataView Close" class="DataView_Close" onclick="ToggleDataView(false)"></div>
             </div>
-            <div id="DataView Info" class ="DataBody_Info"></div>
+            <div id="DataView Content"
+                 style="border-radius: 10px"
+                 class ="DataBody_Content">
+            </div>
         </div>
     </div>
 

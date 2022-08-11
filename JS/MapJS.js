@@ -66,7 +66,8 @@ function UpdateDataView(){
     let mapObject = document.getElementById("DataView");
     if (mapObject){
         let animValue = (0.5 * DataView.AnimationDelta);
-        mapObject.style.setProperty("bottom",`calc(-100% + (30% * ${DataView.AnimationDelta}))`);
+        let objectHeight = mapObject.scrollHeight;
+        mapObject.style.setProperty("bottom",`calc(-${objectHeight}px  + (${objectHeight}px * ${DataView.AnimationDelta}) )`);
     }
 }
 
@@ -142,7 +143,7 @@ function MapLoad()
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
         center: [-1.499929041558289, 52.937081787318014], // starting position [lng, lat]
         zoom: 6, // starting zoom
-        projection: 'equirectangular' // display in default view
+        projection: 'mercator' // display in default view
     });
 
     mapboxMap.map.on('style.load', () => {
