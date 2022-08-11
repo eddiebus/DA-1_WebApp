@@ -125,8 +125,10 @@ div.DataBody_Content{
     background-image: url("MapIcons/maki_svgs/water.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 5vh;
-    height: 5vw;
+    width: 10vw;
+    height: 10vw;
+    max-width: 50px;
+    max-height: 50px;
     cursor: pointer;
 }
 
