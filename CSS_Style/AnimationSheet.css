@@ -11,11 +11,47 @@
 
 @keyframes SlideIn_Left {
     0%{
-        transform: translateX(-100px);
+        transform: translateX(100vw);
     }
 
     100% {
-        transform: translateX(0px);
+        transform: translateX(0vw);
     }
 
 }
+
+@keyframes SlideIn_Right {
+    0%{
+        transform: translateX(-100vw);
+    }
+
+    100% {
+        transform: translateX(0vw);
+    }
+
+}
+
+@keyframes SlideIn_Bottom {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+}
+
+@keyframes SlideIn_Top {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+}
+
