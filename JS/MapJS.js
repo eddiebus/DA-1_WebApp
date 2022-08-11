@@ -1,3 +1,4 @@
+
 const containerName = "Mapbox_Map";
 const mapboxToken = "pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow";
 
@@ -170,6 +171,7 @@ function MapLoad()
     SetDeviceMarkers();
     requestAnimationFrame(MapSystemUpdate);
 
+    helloModule();
 }
 
 function MapDebugLog()

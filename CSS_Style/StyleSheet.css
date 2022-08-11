@@ -108,7 +108,7 @@ div.DataBody_Info{
 }
 
 .mapMarker {
-    background-image: url("MapIcons/mapbox-marker-icon-20px-green.png");
+    background-image: url("MapIcons/maki_svgs/water.svg");
     background-repeat: no-repeat;
     background-size: contain;
     width: 8vw;
