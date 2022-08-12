@@ -117,8 +117,10 @@ div.DataBody_Content{
     margin: 10px;
     width: auto;
     height: auto;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0);
     flex: 1 1 auto;
+
+    display: flex;
 }
 
 .mapMarker {

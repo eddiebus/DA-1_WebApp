@@ -23,6 +23,7 @@ let timeObject = new Time();
 //State & Info of mapbox map
 const mapboxMap = {
     map : null,
+    containerDiv: document.getElementById("Mapbox_Map"),
     mapDebug : false,
     deviceMarkers: []
 }
@@ -30,7 +31,8 @@ const mapboxMap = {
 //State of Data View Box
 let DataView = {
     isActive: false,
-    AnimationDelta: 0
+    AnimationDelta: 0,
+    SelectedIndex: 0
 };
 
 //Triggers in detail tracker view
@@ -63,18 +65,22 @@ function UpdateDataView(){
         }
     }
 
+    //Set Size dependent on animation
     let mapObject = document.getElementById("DataView");
+    let dataview_objectHeight = 0;
     if (mapObject){
-        let animValue = (0.5 * DataView.AnimationDelta);
-        let objectHeight = mapObject.scrollHeight;
-        mapObject.style.setProperty("bottom",`calc(-${objectHeight}px  + (${objectHeight}px * ${DataView.AnimationDelta}) )`);
+        dataview_objectHeight = mapObject.offsetHeight;
+        mapObject.style.setProperty("bottom",`calc(-${dataview_objectHeight}px  + (${dataview_objectHeight}px * ${DataView.AnimationDelta}) )`);
     }
+
 }
 
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
         this.Name = Name;
         this.LocationJSON = positionArray;
+        this.recentSpeed = this.LocationJSON[0]["Speed"];
+        this.recentAltitude = this.LocationJSON[0]["Altitude"];
 
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){
@@ -167,12 +173,11 @@ function MapLoad()
         showUserHeading: true
     });
 
-    mapboxMap.map.addControl(GeoLocateControl);
+
+    mapboxMap.map.addControl(GeoLocateControl,'bottom-right');
 
     SetDeviceMarkers();
     requestAnimationFrame(MapSystemUpdate);
-
-    helloModule();
 }
 
 function MapDebugLog()

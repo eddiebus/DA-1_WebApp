@@ -42,14 +42,35 @@
             <div style="width: calc(100% - 10px);height: 50px; margin-top: 20px">
                 <div id="DataView Close" class="DataView_Close" onclick="ToggleDataView(false)"></div>
             </div>
+
             <div id="DataView Content"
                  style="border-radius: 10px"
                  class ="DataBody_Content">
+                <div id = "Position_Container"
+                     style = "
+                     width: auto;
+                     height: auto;
+                     background-color: rgba(122,255,122,0.46);
+                     flex: 1 1 auto;">
+                </div>
+                <div id = "Altitude_Container"
+                     style = "
+                     width: auto;
+                     height: auto;
+                     background-color: rgba(122,255,244,0.46);
+                     flex: 1 1 auto;">
+                </div>
+                <div id = "Speed_Container"
+                     style = "
+                     width: auto;
+                     height: auto;
+                     background-color: rgba(122,153,255,0.46);
+                     flex: 1 1 auto;">
+                </div>
             </div>
         </div>
     </div>
 
-    <script src = "JS//TestImport.js"></script>
     <script  src="JS//MapJS.js" onload="MapLoad()"></script>
 
 </body>
