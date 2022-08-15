@@ -32,7 +32,7 @@ const mapboxMap = {
 let DataView = {
     isActive: false,
     AnimationDelta: 0,
-    SelectedIndex: 0
+    SelectedDeviceName: "None"
 };
 
 //Triggers in detail tracker view
@@ -45,6 +45,36 @@ function ToggleDataView(toggleBool)
     else
     {
         console.log("DataView off!");
+    }
+}
+
+//Set the Device that the data view will display
+function SetDataViewDevice(DeviceName){
+    let selectIndex = -1;
+
+    for (let i = 0; i < mapboxMap.deviceMarkers.length; i++)
+    {
+        if (mapboxMap.deviceMarkers[i].name == DeviceName)
+        {
+            selectIndex = i;
+            break;
+        }
+    }
+
+    if (selectIndex >= 0) {
+        console.log("Device Found");
+        let selectDevice = mapboxMap.deviceMarkers[selectIndex];
+        let speedTextElement = document.getElementById("DataView_Speed");
+        speedTextElement.innerHTML = selectDevice.recentSpeed.toString();
+
+        let altitudeTextElement = document.getElementById("DataView_Altitude");
+        altitudeTextElement.innerHTML = selectDevice.recentAltitude.toString();
+
+        let locationTextElement = document.getElementById("DataView_Location");
+        let locationString = selectDevice.LocationJSON[0]["Latitude"] + "," + selectDevice.LocationJSON[0]["Longitude"];
+        locationTextElement.innerHTML = locationString;
+    } else {
+        console.log("Couldn't find device. Weird");
     }
 }
 
@@ -81,10 +111,12 @@ class DeviceMarker {
         this.LocationJSON = positionArray;
         this.recentSpeed = this.LocationJSON[0]["Speed"];
         this.recentAltitude = this.LocationJSON[0]["Altitude"];
+        console.log(this.recentAltitude);
 
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){
             ToggleDataView(true);
+            SetDataViewDevice(this.Name)
         });
         this.divObject.className = CSS_Style;
         this.divObject.style.zIndex = 10;
@@ -102,7 +134,6 @@ class DeviceMarker {
     {
         this.markerObject.addTo(map);
     }
-
     RemoveFromMap(){
         this.markerObject.remove();
     }
