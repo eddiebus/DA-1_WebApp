@@ -50,11 +50,13 @@ function ToggleDataView(toggleBool)
 
 //Set the Device that the data view will display
 function SetDataViewDevice(DeviceName){
+    console.log(DeviceName);
     let selectIndex = -1;
 
     for (let i = 0; i < mapboxMap.deviceMarkers.length; i++)
     {
-        if (mapboxMap.deviceMarkers[i].name == DeviceName)
+
+        if (mapboxMap.deviceMarkers[i].Name == DeviceName)
         {
             selectIndex = i;
             break;
@@ -108,6 +110,7 @@ function UpdateDataView(){
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
         this.Name = Name;
+        console.log(this.Name);
         this.LocationJSON = positionArray;
         this.recentSpeed = this.LocationJSON[0]["Speed"];
         this.recentAltitude = this.LocationJSON[0]["Altitude"];
@@ -116,7 +119,7 @@ class DeviceMarker {
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){
             ToggleDataView(true);
-            SetDataViewDevice(this.Name)
+            SetDataViewDevice(Name);
         });
         this.divObject.className = CSS_Style;
         this.divObject.style.zIndex = 10;
@@ -150,7 +153,7 @@ function SetDeviceMarkers() {
         for (let device  = 0; device < DeviceData.length; device++)
         {
             let locationData = DeviceData[device][1];
-            let marker = new DeviceMarker("Test",'mapMarker',locationData);
+            let marker = new DeviceMarker("Test_"+device.toString(),'mapMarker',locationData);
             mapboxMap.deviceMarkers.push(marker);
             marker.SetToMap(mapboxMap.map);
 
