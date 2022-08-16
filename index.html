@@ -2,6 +2,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <!--Set Tab Icon Image-->
+    <link rel="icon" href="Assets/Logos/Think_Ocean.png">
     <!--JQuery Link-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -19,8 +21,6 @@
 </head>
 <body>
     <!--Main Title/ Header-->
-
-
     <div id='Mapbox_Map' style='width: 100%; height: 100vh;background-color: #74cdef'>
         <div class="Header" style="position: relative">
             <!--Title-->
@@ -38,8 +38,7 @@
 
         <div id="DataView" class="DataView">
             <!--Close button. Closes DataView through JS-->
-
-            <div style="width: calc(100% - 10px);height: 50px; margin-top: 20px">
+            <div style="width: auto;height: 50px; margin-top: 20px; margin-left: 10px ;margin-right: 10px">
                 <div id="DataView Close" class="DataView_Close" onclick="ToggleDataView(false)"></div>
             </div>
 
@@ -62,7 +61,7 @@
                 <div id = "Altitude_Container"
                      style = "
                      background-color: rgba(122,255,244,0.46);
-                     flex: 0.8 1 auto;">
+                     flex: 1 1 auto;">
                     <img src="CSS_Style/MapIcons/maki_svgs/mountain.svg" class ="center" style="height: 10vh; max-height: 100px; margin-top: 15px">
                     <div class="center">
                         <p>Altitude</p>
@@ -74,7 +73,7 @@
                      style = "
                      border-top-right-radius: 10px;
                      background-color: rgba(122,153,255,0.46);
-                     flex: 0.8 1 auto;">
+                     flex: 1 1 auto;">
                     <img src="CSS_Style/MapIcons/maki_svgs/rocket.svg" class ="center" style="height: 10vh; max-height: 100px; margin-top: 15px">
                     <div class="center">
                         <p>Speed</p>
@@ -85,7 +84,8 @@
         </div>
     </div>
 
-    <script  src="JS//MapJS.js" onload="MapLoad()"></script>
+    <!--Load Script-->
+    <script  src="JS/MapJS.js" onload="MapLoad()"></script>
 
 </body>
 </html>

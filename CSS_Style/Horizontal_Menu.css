@@ -1,0 +1,15 @@
+div.horizontalMenu {
+    background-color: black;
+    overflow-x: scroll ;
+    white-space: nowrap;
+
+    max-width: 500px;
+    cursor: grab;
+    user-select: none;
+}
+
+div.horizontalMenu_Item {
+    display: inline-block;
+    pointer-events: none;
+}
+

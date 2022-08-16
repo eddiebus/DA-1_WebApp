@@ -62,7 +62,6 @@ function SetDataViewDevice(DeviceName){
             break;
         }
     }
-
     if (selectIndex >= 0) {
         console.log("Device Found");
         let selectDevice = mapboxMap.deviceMarkers[selectIndex];
