@@ -23,6 +23,8 @@ function horizontalScroll_MouseMove(eventObj) {
         let currentX = eventObj.pageX - eventElement.offsetLeft;
         let scrollDelta = currentX - horizontalScroll_Mouse.startX;
         eventElement.scrollLeft = eventElement.scrollLeft - scrollDelta;
+
+        horizontalScroll_Mouse.startX = eventObj.pageX - eventElement.offsetLeft;
     }
 }
 
