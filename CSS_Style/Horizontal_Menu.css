@@ -2,10 +2,12 @@ div.horizontalMenu {
     background-color: black;
     overflow-x: scroll ;
     white-space: nowrap;
-
-    max-width: 500px;
     cursor: grab;
     user-select: none;
+}
+
+.horizontalMenu:active{
+    cursor: grabbing;
 }
 
 div.horizontalMenu_Item {

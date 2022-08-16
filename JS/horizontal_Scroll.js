@@ -23,22 +23,17 @@ function horizontalScroll_MouseMove(eventObj) {
         let currentX = eventObj.pageX - eventElement.offsetLeft;
         let scrollDelta = currentX - horizontalScroll_Mouse.startX;
         eventElement.scrollLeft = eventElement.scrollLeft - scrollDelta;
-
         horizontalScroll_Mouse.startX = eventObj.pageX - eventElement.offsetLeft;
     }
 }
 
 function horizontalScroll_MouseDown(eventObj) {
-
-    console.log("Mouse Down!");
     let eventElement = eventObj.target;
-
     horizontalScroll_Mouse.mouseDown = true;
     horizontalScroll_Mouse.startX = eventObj.pageX - eventElement.offsetLeft;
 
 }
 
 function horizontalScroll_MouseUp(eventObj) {
-    console.log("Mouse Up")
     horizontalScroll_Mouse.mouseDown = false;
 }
