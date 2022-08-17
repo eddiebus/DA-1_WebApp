@@ -125,11 +125,10 @@ img.Header:hover{
 }
 
 div.DataBody_Content{
-    border-radius: 10px;
     margin: 10px;
     width: auto;
     height: auto;
-    background-color: rgba(255, 0, 0, 1);
+    background-color: rgb(82, 82, 82);
     flex: 1 1 auto;
 
     display: flex;
@@ -145,5 +144,8 @@ div.DataBody_Content{
     max-height: 50px;
     cursor: pointer;
 }
+
+/*ScrollBar*/
+
 
 

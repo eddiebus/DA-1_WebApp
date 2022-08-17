@@ -42,52 +42,26 @@
                 <div id="DataView Close" class="DataView_Close" onclick="ToggleDataView(false)"></div>
             </div>
 
-            <div id ="Data_Content" class="DataBody_Content horizontalMenu" style="flex: 1 1 auto;height: 20vh"></div>
+            <div id ="Data_Content" class="DataBody_Content horizontalMenu" style="flex: 1 1 auto;height: 30vh">
+                <div id="Location_Container" class="horizontalMenu_Item" style="width: 80vw; height: auto; background-color: #74cdef">
 
-            <div id="DataView Content"
-                 style="border-radius: 10px"
-                 class ="DataBody_Content">
-                <div id = "Position_Container"
-                     style = "
-                     border-top-left-radius: 10px;
-                     background-color: rgba(122,255,122,0.46);
-                     flex: 1 1 auto;">
-                    <img src="CSS_Style/MapIcons/maki_svgs/marker.svg" class ="center" style="height: 10vh; max-height: 100px; margin-top: 15px">
-
-                    <div class="center">
-                        <p>Location</p>
-                        <p id = "DataView_Location" style ="font-weight: bold; overflow: clip"></p>
-
-                    </div>
                 </div>
-                <div id = "Altitude_Container"
-                     style = "
-                     background-color: rgba(122,255,244,0.46);
-                     flex: 1 1 auto;">
-                    <img src="CSS_Style/MapIcons/maki_svgs/mountain.svg" class ="center" style="height: 10vh; max-height: 100px; margin-top: 15px">
-                    <div class="center">
-                        <p>Altitude</p>
-                        <p id = "DataView_Altitude" style ="font-weight: bold; overflow: clip"></p>
 
-                    </div>
+                <div id="Alt_Container" class="horizontalMenu_Item" style="width: 80vw; height: auto; background-color: #74cdef">
+
                 </div>
-                <div id = "Speed_Container"
-                     style = "
-                     border-top-right-radius: 10px;
-                     background-color: rgba(122,153,255,0.46);
-                     flex: 1 1 auto;">
-                    <img src="CSS_Style/MapIcons/maki_svgs/rocket.svg" class ="center" style="height: 10vh; max-height: 100px; margin-top: 15px">
-                    <div class="center">
-                        <p>Speed</p>
-                        <p id = "DataView_Speed" style ="font-weight: bold; overflow: clip"></p>
-                    </div>
+
+                <div id="SpeedD_Container" class="horizontalMenu_Item" style="width: 80vw; height: auto; background-color: #74cdef">
+
                 </div>
             </div>
+
+
         </div>
     </div>
 
     <!--Load Script-->
     <script  src="JS/MapJS.js" onload="MapLoad()"></script>
-
+    <script src="JS/horizontal_Scroll.js" onload="horizontalScrollInit()"></script>
 </body>
 </html>

@@ -1,17 +1,53 @@
 div.horizontalMenu {
     background-color: black;
     overflow-x: scroll ;
+    overflow-y: hidden;
     white-space: nowrap;
     cursor: grab;
     user-select: none;
+
+    display: inline-block;
+    border-radius: 10px;
+}
+
+
+
+div.horizontalMenu_Item {
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    pointer-events: none;
+
+    flex:none
+}
+
+.horizontalMenu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.horizontalMenu::-webkit-scrollbar-track {
+    background: #505050;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+/* Handle */
+.horizontalMenu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+
+    border: solid black 2px;
+
+}
+
+/* Handle on hover */
+.horizontalMenu::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .horizontalMenu:active{
     cursor: grabbing;
-}
-
-div.horizontalMenu_Item {
-    display: inline-block;
-    pointer-events: none;
 }
 
