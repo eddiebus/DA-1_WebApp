@@ -1,6 +1,6 @@
 div.horizontalMenu {
-    background-color: black;
-    overflow-x: scroll ;
+    margin-bottom: 10px;
+    overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     cursor: grab;
@@ -13,6 +13,8 @@ div.horizontalMenu {
 
 
 div.horizontalMenu_Item {
+    background-color: #d5f3ff;
+    border-radius: 10px;
     margin-right: 10px;
     margin-top: 10px;
     height: auto;
@@ -20,33 +22,14 @@ div.horizontalMenu_Item {
     display: inline-block;
     pointer-events: none;
 
-    flex:none
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    flex: none;
 }
 
-.horizontalMenu::-webkit-scrollbar {
-    width: 200px;
-}
 
-.horizontalMenu::-webkit-scrollbar-track {
-    background: #000000;
-    border-radius: 10px;
-}
 
-/* Handle */
-.horizontalMenu::-webkit-scrollbar-thumb {
-    background: #656565;
-    border-radius: 10px;
 
-    border: solid #afafaf 2px;
-
-}
-
-/* Handle on hover */
-.horizontalMenu::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-.horizontalMenu:active{
-    cursor: grabbing;
-}
 

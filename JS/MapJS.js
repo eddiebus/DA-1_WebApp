@@ -118,7 +118,7 @@ class DeviceMarker {
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){
             ToggleDataView(true);
-            //SetDataViewDevice(Name);
+            SetDataViewDevice(Name);
         });
         this.divObject.className = CSS_Style;
         this.divObject.style.zIndex = 10;

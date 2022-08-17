@@ -1,11 +1,6 @@
 ﻿@import "AnimationSheet.css";
 @import "Horizontal_Menu.css";
 
-
-::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-
 /*Create Custom Fonts*/
 @font-face {
     font-family: Oswald;
@@ -61,6 +56,7 @@ p{
 
 .Header{
     z-index: 15;
+    user-select: none;
 }
 
 div.Header{
@@ -133,9 +129,8 @@ div.DataBody_Content{
     margin: 10px;
     width: auto;
     height: auto;
-    background-color: rgb(82, 82, 82);
+    background-color: rgb(73, 73, 73);
     flex: 1 1 auto;
-
     display: flex;
 }
 
