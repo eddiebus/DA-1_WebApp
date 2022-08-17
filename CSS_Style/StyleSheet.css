@@ -73,12 +73,11 @@ div.Header{
 img.Header{
     display: block;
     height: 3vh;
-    max-height: 30px;
 
     width: auto;
 
     margin: 8px;
-    vertical-align: middle;
+    vertical-align: baseline;
 
     float: right;
     overflow: clip;
