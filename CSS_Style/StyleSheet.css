@@ -25,17 +25,14 @@ h1{
     display: inline-block;
     /*Font and positioning*/
     font-family: Oswald, Arial, Helvetica, sans-serif;
-    font-size: 30px;
+    font-size: 3vh;
+    line-height: 0vh;
+
 
     width: 50%;
-    height: 50px;
-
+    height: 30vh;
     margin-left: 10px;
-    margin-top: 0;
-    margin-bottom: 0;
-
     animation: FadeIn 1.5s, SlideIn_Right 1.5s;
-    padding: 10px;
 }
 
 p{
@@ -62,7 +59,8 @@ p{
 div.Header{
     background-color: rgb(255, 255, 255);
     margin: 0;
-    height: 50px;
+    height: 5vh;
+    min-height: 30px;
     width: 100%;
     border-bottom: 3px solid black;
 
@@ -74,15 +72,16 @@ div.Header{
 
 img.Header{
     display: block;
-    height: 30px;
+    height: 3vh;
+    max-height: 30px;
+
     width: auto;
 
     margin: 8px;
-    vertical-align: baseline;
+    vertical-align: middle;
 
     float: right;
     overflow: clip;
-
     animation: FadeIn 1.5s, SlideIn_Left 1.5s;
 }
 
