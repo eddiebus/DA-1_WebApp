@@ -1,6 +1,11 @@
 ﻿@import "AnimationSheet.css";
 @import "Horizontal_Menu.css";
 
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
 /*Create Custom Fonts*/
 @font-face {
     font-family: Oswald;
