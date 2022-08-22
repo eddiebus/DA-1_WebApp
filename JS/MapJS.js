@@ -72,7 +72,17 @@ function SetDataViewDevice(DeviceName){
         altitudeTextElement.innerHTML = selectDevice.recentAltitude.toString();
 
         let locationTextElement = document.getElementById("DataView_Location");
-        let locationString = selectDevice.LocationJSON[0]["Latitude"] + "," + selectDevice.LocationJSON[0]["Longitude"];
+        let LatLongString = [selectDevice.LocationJSON[0]["Latitude"],selectDevice.LocationJSON[0]["Longitude"]];
+
+        for (let i = 0; i < LatLongString.length; i++)
+        {
+            let maxChar = 6;
+            if (LatLongString[i].length > maxChar)
+            {
+                LatLongString[i] = LatLongString[i].substring(0,maxChar);
+            }
+        }
+        let locationString = LatLongString[0] + " , " + LatLongString[1];
         locationTextElement.innerHTML = locationString;
     } else {
         console.log("Couldn't find device. Weird");

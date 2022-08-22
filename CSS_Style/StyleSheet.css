@@ -22,11 +22,12 @@ body {
 }
 
 h1{
-    display: inline;
+    display: inline-block;
     /*Font and positioning*/
     font-family: Oswald, Arial, Helvetica, sans-serif;
     font-size: 20px;
     vertical-align: middle;
+    line-height: 40px;
 
     margin-left: 30px;
     margin-top: auto;

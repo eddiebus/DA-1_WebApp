@@ -16,6 +16,7 @@ div.horizontalMenu_Item {
     background-color: #d5f3ff;
     border-radius: 10px;
     margin-right: 10px;
+    margin-left: 10px;
     margin-top: 10px;
     height: auto;
     margin-bottom: 10px;
@@ -26,8 +27,14 @@ div.horizontalMenu_Item {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+
+    /*Set and override flex properties*/
     flex: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
+
 
 
 
