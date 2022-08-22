@@ -22,17 +22,17 @@ body {
 }
 
 h1{
-    display: inline-block;
+    display: inline;
     /*Font and positioning*/
     font-family: Oswald, Arial, Helvetica, sans-serif;
-    font-size: 3vh;
-    line-height: 0vh;
+    font-size: 20px;
+    vertical-align: middle;
 
-
-    width: 50%;
-    height: 30vh;
-    margin-left: 10px;
+    margin-left: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
     animation: FadeIn 1.5s, SlideIn_Right 1.5s;
+
 }
 
 p{
@@ -59,29 +59,30 @@ p{
 div.Header{
     background-color: rgb(255, 255, 255);
     margin: 0;
-    height: 5vh;
-    min-height: 30px;
-    width: 100%;
+    height: 45px;
+    line-height: 30px;
+    width: 100vw;
     border-bottom: 3px solid black;
-
-    overflow: clip;
 
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
+    overflow: hidden;
+
 }
 
 img.Header{
-    display: block;
-    height: 3vh;
-
-    width: auto;
-
-    margin: 8px;
-    vertical-align: baseline;
-
+    display: inline-block;
     float: right;
+    height: 25px;
+    width: auto;
+    margin-right: 10px;
+
     overflow: clip;
     animation: FadeIn 1.5s, SlideIn_Left 1.5s;
+
+    margin-top: 5px;
+
 }
 
 img.Header:hover{
@@ -106,8 +107,8 @@ img.Header:hover{
 .DataView_Close{
     border-radius: 10px;
     padding: 5px;
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: 8vh;
     float: right;
 
     background-image: url("MapIcons/close_icon.svg");

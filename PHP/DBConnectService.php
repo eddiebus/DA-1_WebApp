@@ -303,16 +303,4 @@ VALUES (
         return $returnData;
     }
 
-    public function GetDeviceLocation(string $TargetIMEI): array
-    {
-        $selectQuery = "SELECT * FROM [dbo].[LocatePing]
-         WHERE [Device] = '$TargetIMEI'";
-        $queryResult = $this->dbConn->query($selectQuery);
-        $returnArray = array();
-
-        foreach ($queryResult as $row){
-            $returnArray[] = $row;
-        }
-        return $returnArray;
-    }
 }
