@@ -83,6 +83,13 @@ function SetDataViewDevice(DeviceName){
             }
         }
         let locationString = LatLongString[0] + " , " + LatLongString[1];
+
+        mapboxMap.map.flyTo(
+            {
+                center: [LatLongString[1],LatLongString[0]],
+                zoom: 8
+            }
+        );
         locationTextElement.innerHTML = locationString;
     } else {
         console.log("Couldn't find device. Weird");
