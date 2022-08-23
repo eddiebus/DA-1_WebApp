@@ -90,12 +90,12 @@ img.Header:hover{
     opacity: 0.5;
 }
 
-.DataView{
+div.DataView{
     position: fixed;
     z-index : 15;
     bottom: -100%;
     width: 100%;
-    height: 40vh;
+    height: 30vh;
     background-color: white;
     border-top: solid #000000 3px;
     border-top-left-radius: 10px;
