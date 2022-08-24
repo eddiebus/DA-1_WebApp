@@ -1,3 +1,4 @@
+/*Styles use for the data view section of the webpage*/
 
 /*Main DataView*/
 div.DataView{
@@ -25,25 +26,56 @@ div.DataBody_Content{
     display: flex;
 }
 
-div.DataBody_Content{
-    margin: 10px;
-    width: auto;
+
+div.DataBody_Content_Title{
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+
+div.DataBody_Content_Title p {
+    display:inline;
     height: auto;
-    background-color: rgb(73, 73, 73);
-    flex: 1 1 auto;
-    display: flex;
+    width: 50%;
+    margin: 0;
+    font-weight: bold;
+    font-size: max(3vh,15px);
+    line-height: max(6vh,30px);
+}
+
+img.DataBody_Content_Icon{
+    float: left;
+    width: auto;
+    height: 6vh;
+    min-height: 25px;
+    margin-right: 20px
+}
+
+p.DataBody_Content_DataP {
+    display:inline;
+    margin-top: 0px;
+    font-weight: bold;
+    font-size: max(3vh,15px);
+    line-height: max(6vh,30px);
+
+    font-weight: bolder;
+    text-align: center;
 }
 
 
 /*Close Section */
 .DataView_Close {
     height: 5vh;
+    min-height: 16px;
     width: auto;
     float: right;
+    user-select: none;
 }
 
 .DataView_Close:Hover{
     opacity: 0.5;
+    cursor: pointer;
 }
 
 .DataView_Close:active{

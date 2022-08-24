@@ -3,13 +3,20 @@ div.horizontalMenu {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    cursor: grab;
     user-select: none;
-
     display: inline-block;
     border-radius: 10px;
+
+    user-select: none;
 }
 
+div.horizontalMenu:hover{
+    cursor: grab;
+}
+
+div.horizontalMenu:active {
+    cursor: grabbing;
+}
 
 
 div.horizontalMenu_Item {
@@ -30,7 +37,11 @@ div.horizontalMenu_Item {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    user-select: none;
 }
+
+
 
 
 

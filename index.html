@@ -24,7 +24,7 @@
     <div id='Mapbox_Map' style='width: 100%; height: 100vh;background-color: #74cdef'>
         <div class="Header" style="position: relative">
             <!--Title-->
-            <h1>Life DA-1 Finder </h1>
+            <h1>Life DA-1 Map </h1>
 
 
             <!--Image Links-->
@@ -47,43 +47,53 @@
             <div id ="Data_Content" class="DataBody_Content horizontalMenu" style="flex: 1 1 auto;height: 30vh;">
 
                 <div id="Location_Container" class="horizontalMenu_Item" style="width: 60vw">
-                    <div style="margin-left: 10px; margin-top: 10px; display: inline-block">
-                        <img src="CSS_Style/MapIcons/maki_svgs/marker.svg" style="float: left;width: auto; height: 6vh;margin-right: 20px">
-                        <p style="display:inline;height: auto;width: 50%;margin: 0;font-weight: bold;font-size: 3vh;line-height: 6vh">
+                    <div class="DataBody_Content_Title">
+
+                        <img src="CSS_Style/MapIcons/maki_svgs/marker.svg" class ="DataBody_Content_Icon">
+                        <p>
                             Location
                         </p>
+
                     </div>
-                    <p id="DataView_Location" style="font-weight: bolder;text-align: center;font-size: 3vh"></p>
+                    <p id="DataView_Location" class="DataBody_Content_DataP"></p>
                 </div>
 
                 <div id="Alt_Container" class="horizontalMenu_Item" style="width: 60vw">
-                    <div style="margin-left: 10px; margin-top: 10px; display: inline-block">
+                    <div class="DataBody_Content_Title">
+
                         <img src="CSS_Style/MapIcons/maki_svgs/mountain.svg" style="float: left;width: auto; height: 6vh;margin-right: 20px">
-                        <p style="display:inline;height: auto;width: 50%;margin: 0;font-weight: bold;font-size: 3vh;line-height: 6vh">
+                        <p>
                             Altitude
                         </p>
+
                     </div>
-                    <p id="DataView_Altitude" style="font-weight: bolder;text-align: center;font-size: 3vh"></p>
+                    <p id="DataView_Altitude" class="DataBody_Content_DataP"></p>
                 </div>
 
                 <div id="Speed_Container" class="horizontalMenu_Item" style="width: 60vw">
-                    <div style="margin-left: 10px; margin-top: 10px; display: inline-block">
+
+                    <div class="DataBody_Content_Title">
+
                         <img src="CSS_Style/MapIcons/maki_svgs/rocket.svg" style="float: left;width: auto; height: 6vh;margin-right: 20px">
-                        <p style="display:inline;height: auto;width: 50%;margin: 0;font-weight: bold;font-size: 3vh;line-height: 6vh">
+                        <p>
                             Speed
                         </p>
+
                     </div>
-                    <p id="DataView_Speed" style="font-weight: bolder;text-align: center;font-size: 3vh;height: 5vh;line-height: 5vh"></p>
+                    <p id="DataView_Speed" class="DataBody_Content_DataP"></p>
+
                 </div>
 
                 <div id="Time_Container" class="horizontalMenu_Item" style="width: 80vw">
-                    <div style="margin-left: 10px; margin-top: 10px; display: inline-block">
+                    <div class="DataBody_Content_Title">
+
                         <img src="CSS_Style/MapIcons/maki_svgs/watch.svg" style="float: left;width: auto; height: 6vh;margin-right: 20px">
                         <p style="display:inline;height: auto;width: 50%;margin: 0;font-weight: bold;font-size: 3vh;line-height: 6vh">
                             Dispatch Time
                         </p>
+
                     </div>
-                    <p id="DataView_Time" style="font-weight: bolder;text-align: center;font-size: 3vh;height: 5vh;line-height: 5vh"></p>
+                    <p id="DataView_Time" class="DataBody_Content_DataP"></p>
                 </div>
 
                 </div>

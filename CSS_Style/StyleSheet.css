@@ -94,7 +94,10 @@ img.Header:hover{
     cursor: pointer;
 }
 
-/*ScrollBar*/
+/*Disable ScrollBar*/
+::-webkit-scrollbar{
+    display: none;
+}
 
 
 
