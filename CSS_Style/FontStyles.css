@@ -1,0 +1,10 @@
+/* New fonts to be included*/
+@font-face {
+    font-family: Oswald;
+    src: url("Fonts/Oswald/Oswald-Regular.ttf");
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url("Fonts/QuickSand/Quicksand-Regular.ttf");
+}

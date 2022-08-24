@@ -1,0 +1,51 @@
+
+/*Main DataView*/
+div.DataView{
+    position: fixed;
+    z-index : 15;
+    bottom: -100%;
+    width: 100%;
+    height: 30vh;
+    min-height: 150px;
+    background-color: white;
+    border-top: solid #000000 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    display: flex;
+    flex-flow: column;
+}
+
+div.DataBody_Content{
+    margin: 10px;
+    width: auto;
+    height: auto;
+    background-color: rgb(73, 73, 73);
+    flex: 1 1 auto;
+    display: flex;
+}
+
+div.DataBody_Content{
+    margin: 10px;
+    width: auto;
+    height: auto;
+    background-color: rgb(73, 73, 73);
+    flex: 1 1 auto;
+    display: flex;
+}
+
+
+/*Close Section */
+.DataView_Close {
+    height: 5vh;
+    width: auto;
+    float: right;
+}
+
+.DataView_Close:Hover{
+    opacity: 0.5;
+}
+
+.DataView_Close:active{
+    opacity: 1;
+}

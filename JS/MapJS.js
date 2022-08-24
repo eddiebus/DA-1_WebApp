@@ -91,6 +91,9 @@ function SetDataViewDevice(DeviceName){
             }
         );
         locationTextElement.innerHTML = locationString;
+
+        let timeTextElement = document.getElementById("DataView_Time");
+        timeTextElement.innerHTML = selectDevice.StartDate.toString();
     } else {
         console.log("Couldn't find device. Weird");
     }
@@ -126,11 +129,10 @@ function UpdateDataView(){
 class DeviceMarker {
     constructor(Name, CSS_Style,positionArray) {
         this.Name = Name;
-        console.log(this.Name);
         this.LocationJSON = positionArray;
         this.recentSpeed = this.LocationJSON[0]["Speed"];
         this.recentAltitude = this.LocationJSON[0]["Altitude"];
-        console.log(this.recentAltitude);
+        this.StartDate = this.LocationJSON[this.LocationJSON.length - 1]["TimeSent"];
 
         this.divObject = document.createElement('div');
         this.divObject.addEventListener('click',function(){

@@ -40,8 +40,8 @@
 
         <div id="DataView" class="DataView">
             <!--Close button. Closes DataView through JS-->
-            <div style="width: auto;height:4vh; margin-top: 10px; margin-left: 10px ;margin-right: 10px">
-                <img src="CSS_Style/MapIcons/close_icon.svg" style = "float: right; height: 5vh" onclick="ToggleDataView(false)">
+            <div style="width: auto;height:4vh; margin: 10px 10px 2vh;">
+                <img src="CSS_Style/MapIcons/close_icon.svg" class = "DataView_Close" onclick="ToggleDataView(false)">
             </div>
 
             <div id ="Data_Content" class="DataBody_Content horizontalMenu" style="flex: 1 1 auto;height: 30vh;">
@@ -74,6 +74,16 @@
                         </p>
                     </div>
                     <p id="DataView_Speed" style="font-weight: bolder;text-align: center;font-size: 3vh;height: 5vh;line-height: 5vh"></p>
+                </div>
+
+                <div id="Time_Container" class="horizontalMenu_Item" style="width: 80vw">
+                    <div style="margin-left: 10px; margin-top: 10px; display: inline-block">
+                        <img src="CSS_Style/MapIcons/maki_svgs/watch.svg" style="float: left;width: auto; height: 6vh;margin-right: 20px">
+                        <p style="display:inline;height: auto;width: 50%;margin: 0;font-weight: bold;font-size: 3vh;line-height: 6vh">
+                            Dispatch Time
+                        </p>
+                    </div>
+                    <p id="DataView_Time" style="font-weight: bolder;text-align: center;font-size: 3vh;height: 5vh;line-height: 5vh"></p>
                 </div>
 
                 </div>
