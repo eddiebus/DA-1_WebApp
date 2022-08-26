@@ -1,3 +1,7 @@
+//Horizontal Scroll Script
+//Checks for mouse input and scroll menus
+//Mobile Devices have automatic support
+
 function horizontalScrollInit(){
     let elements = document.getElementsByClassName("horizontalMenu");
     for (let i = 0; i < elements.length; i++)

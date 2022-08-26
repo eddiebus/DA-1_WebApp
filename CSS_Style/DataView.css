@@ -67,7 +67,7 @@ p.DataBody_Content_DataP {
 /*Close Section */
 .DataView_Close {
     height: 5vh;
-    min-height: 16px;
+    min-height: 25px;
     width: auto;
     float: right;
     user-select: none;
