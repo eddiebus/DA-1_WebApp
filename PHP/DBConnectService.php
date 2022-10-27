@@ -1,11 +1,11 @@
 
 <?php
 /*
-Class that handles connection to azure database.
+Class that handles connection to azure SQL database.
 Has set functions for manipulating data
 */ 
 
-//DB Info (Azure) 
+//Database Info (Azure)
 $dbAddress = "uod-thinkocean.database.windows.net";
 $dbName = "DA1_DB";
 $dbUserName = "UODThinkOceanAdmin";

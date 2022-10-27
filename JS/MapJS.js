@@ -1,5 +1,6 @@
 
-const containerName = "Mapbox_Map";
+const containerName = "Mapbox_Map"; //HTML Element (DIV) element is displayed on
+// Mapbox Token. Must come from Mapbox Account.
 const mapboxToken = "pk.eyJ1IjoiZWRkaWVidXMiLCJhIjoiY2w0Y2p3bjR5MDBpeDNrcGlnZGVsZHdieSJ9.s7qo4SWniW11X0nn3y96ow";
 
 
