@@ -6,7 +6,7 @@ Has set functions for manipulating data
 */ 
 
 //Database Info (Azure)
-$dbAddress = "uod-thinkocean.database.windows.net";
+$dbAddress = "da1dbserver.database.windows.net";
 $dbName = "DA1_DB";
 $dbUserName = "UODThinkOceanAdmin";
 $dbPassword = "taAdmin!";
