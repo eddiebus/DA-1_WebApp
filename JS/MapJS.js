@@ -73,7 +73,7 @@ function SetDeviceMarkers() {
     //Get all Devices IMEI
     $.ajax({
         type: 'GET',
-        url: "https://da1webapp.azurewebsites.net//PHP/DataGet.php",
+        url: "https://da1webapp.azurewebsites.net/PHP/DataGet.php",
         dataType: 'jsonp',
         contentType: "application/json",
         success: function (data) {
